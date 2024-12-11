@@ -155,6 +155,12 @@ public class ContattoController extends Controller implements Initializable {
     confirmButton.disableProperty().bind(Bindings.createBooleanBinding(
             () -> (nameField.getText().isEmpty() && surnameField.getText().isEmpty()), nameField.textProperty(), surnameField.textProperty()));
     
+    contactPane.setOnKeyPressed(event -> {
+        if (event.getCode() == javafx.scene.input.KeyCode.ENTER) {
+            confirmButton.fire(); // Simula un click sul bottone
+        }
+        });
+    
     }
     
     
@@ -387,7 +393,7 @@ public class ContattoController extends Controller implements Initializable {
       private void confAdd(){
       
            boolean flag = true;
-
+           
 
             if (!nominativeControl(nameField.getText(), surnameField.getText())) {
                     Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -488,7 +494,7 @@ public class ContattoController extends Controller implements Initializable {
     }
 
 
-
+            
                 if (flag) {
                         
                         contattoSelezionato.setNome(nameField.getText());
@@ -499,19 +505,19 @@ public class ContattoController extends Controller implements Initializable {
                         contattoSelezionato.setNumero1(number1Field.getText());
                         contattoSelezionato.setNumero2(number2Field.getText());
                         contattoSelezionato.setNumero3(number3Field.getText());
-                  
+                  contactPane.setOnKeyPressed(event -> {
+        if (event.getCode() == javafx.scene.input.KeyCode.ENTER) {
+            confirmButton.fire(); // Simula un click sul bottone
+        }
+        });
                         Collections.sort(rubricaPointer.getContactList());
                         
                        contactPane.getChildren().clear();
                         
                         
-                       tablePointer.refresh();
-                        
-                       
-                       
-                        
+                       tablePointer.refresh();    
     
-    }
+                    }
          
          
          
