@@ -223,6 +223,7 @@ public class ContattoController extends Controller implements Initializable {
         
         confirmButton.setVisible(false);
         exitButton.setVisible(false);
+        removeButton.setVisible(false);
         disableModify(true);
         
         
