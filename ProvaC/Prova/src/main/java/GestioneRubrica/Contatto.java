@@ -215,22 +215,49 @@ public class Contatto implements Comparable<Contatto> {
      */
     @Override
     public int compareTo(Contatto c) {
-      
-      if(c == null){ 
-            throw new NullPointerException("Il contatto fornito è null");
-        }
-        
-      if(this.cognome.isEmpty()){
-          if(c.cognome.isEmpty())
-               return this.nome.compareTo(c.nome);
-          return -1;
-      }
-      else if(c.cognome.isEmpty())
-          return 1;
-      return this.cognome.compareTo(c.cognome);
-            
+     boolean thisHasNome = nome != null && !nome.isEmpty();
+        boolean thisHasCognome = cognome != null && !cognome.isEmpty();
+        boolean otherHasNome = c.nome != null && !c.nome.isEmpty();
+        boolean otherHasCognome = c.cognome != null && !c.cognome.isEmpty();
 
-    
+        // Categoria 1: nome e cognome presenti
+        if (thisHasNome && thisHasCognome && !(otherHasNome && otherHasCognome)) {
+            return -1;
+        }
+        if (!(thisHasNome && thisHasCognome) && otherHasNome && otherHasCognome) {
+            return 1;
+        }
+
+        // Categoria 2: solo cognome presente
+        if (thisHasCognome && !thisHasNome && !(otherHasCognome && !otherHasNome)) {
+            return -1;
+        }
+        if (!(thisHasCognome && !thisHasNome) && otherHasCognome && !otherHasNome) {
+            return 1;
+        }
+
+        // Categoria 3: solo nome presente
+        if (thisHasNome && !thisHasCognome && !(otherHasNome && !otherHasCognome)) {
+            return -1;
+        }
+        if (!(thisHasNome && !thisHasCognome) && otherHasNome && !otherHasCognome) {
+            return 1;
+        }
+
+        // Ordinamento alfabetico all'interno della stessa categoria
+        if (thisHasCognome && otherHasCognome) {
+            int compareCognome = cognome.compareToIgnoreCase(c.cognome);
+            if (compareCognome != 0) {
+                return compareCognome;
+            }
+        }
+
+        if (thisHasNome && otherHasNome) {
+            return nome.compareToIgnoreCase(c.nome);
+        }
+
+        return 0;
+
     }
 
 
