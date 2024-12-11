@@ -17,6 +17,7 @@
 package Controller;
 
 
+import GestioneRubrica.Avviso;
 import GestioneRubrica.Contatto;
 import GestioneRubrica.Rubrica;
 import java.awt.Button;
@@ -372,7 +373,7 @@ public class ContattoController implements Initializable {
            
 
             if (!nominativeControl(nameField.getText(), surnameField.getText())) {
-                    error("Nominativi inseriti erroneamente");
+                    Avviso.errore("Errore","Nominativi inseriti erroneamente");
                     flag = false;
                 }
 
@@ -386,7 +387,7 @@ public class ContattoController implements Initializable {
                     && mailControl(email3Field.getText()))) 
     
                 {
-                    error("Recapiti inseriti erroneamente");
+                    Avviso.errore("Errore","Recapiti inseriti erroneamente");
                     flag = false;
     
     }
@@ -431,7 +432,7 @@ public class ContattoController implements Initializable {
 
 
             if (!nominativeControl(nameField.getText(), surnameField.getText())) {
-                    error("Nominativi modificati erroneamente");
+                    Avviso.errore("Errore","Nominativi modificati erroneamente");
                     flag = false;
                 }
 
@@ -446,7 +447,7 @@ public class ContattoController implements Initializable {
     
                 {
     
-                    error("Recapiti modificati erroneamente");
+                    Avviso.errore("Errore","Recapiti modificati erroneamente");
                     flag = false;
     
     }
@@ -484,13 +485,6 @@ public class ContattoController implements Initializable {
     
     
     
-    private void error(String error){
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Errore");
-        alert.setHeaderText(null); // Se non vuoi nessun header, puoi impostarlo a null
-        alert.setContentText(error);
-        alert.showAndWait();
-    }
     
     
     

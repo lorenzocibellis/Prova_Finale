@@ -13,6 +13,7 @@
 
 package Controller;
 
+import GestioneRubrica.Avviso;
 import GestioneRubrica.Contatto;
 import GestioneRubrica.Rubrica;
 import com.mycompany.prova.App;
@@ -180,28 +181,14 @@ public class RubricaController implements Initializable {
     ObservableList<Contatto> temp = rubricaList.getSelectionModel().getSelectedItems();
     if(temp.size() == 0)
         return;
-    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-    alert.setTitle("Attenzione");
-    alert.setHeaderText(null); //
-    alert.setContentText("Sei sicuro di voler eliminare il/i contatto/i?");
 
-  
-    alert.getButtonTypes().setAll(ButtonType.YES, ButtonType.NO);    
-    
-    Optional<ButtonType> result = alert.showAndWait();
-    
-    if (result.isPresent()) {
-    
-        if (result.get() == ButtonType.YES) {
+        if (Avviso.conferma("Attenzione", "Sei sicuro di voler eliminare il/i contatto/i?")) {
        
        rubricaPointer.rimuoviContatto(temp);
             contattoPane.getChildren().clear();
     
         }
         
-    }
-        
-    
     }
 
     
@@ -232,11 +219,7 @@ public class RubricaController implements Initializable {
             rubricaList.setItems(rubricaPointer.getContactList());
         
             
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                     alert.setTitle("Avviso");
-                    alert.setHeaderText(null); // Se non vuoi nessun header, puoi impostarlo a null
-                    alert.setContentText("La rubrica è stata importata con successo!");
-                    alert.showAndWait();
+                Avviso.info("Avviso", "La rubrica è stata importata con successo");
             
             
             
@@ -274,11 +257,7 @@ public class RubricaController implements Initializable {
     
         rubricaPointer.esportaRubrica(file.getAbsolutePath());
    
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                     alert.setTitle("Avviso");
-                    alert.setHeaderText(null); // Se non vuoi nessun header, puoi impostarlo a null
-                    alert.setContentText("La rubrica è stata esportata con successo!");
-                    alert.showAndWait();
+        Avviso.info("Avviso", "La rubrica è stata esportata con successo");
         
         
     }else{
