@@ -358,9 +358,9 @@ public class ContattoController implements Initializable {
     }
     
     private boolean nominativeControl(String name, String surname){
-        if (!name.isEmpty() && Character.isLetter(name.charAt(0)))
-            return true;
-        return ( !surname.isEmpty() && Character.isLetter(surname.charAt(0)) );
+        if (!name.isEmpty() && !Character.isLetter(name.charAt(0)))
+            return false;
+        return !( !surname.isEmpty() && !Character.isLetter(surname.charAt(0)) );
     }
     
     
@@ -374,11 +374,7 @@ public class ContattoController implements Initializable {
            
 
             if (!nominativeControl(nameField.getText(), surnameField.getText())) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                     alert.setTitle("Errore");
-                    alert.setHeaderText(null); // Se non vuoi nessun header, puoi impostarlo a null
-                    alert.setContentText("Nominativi inseriti erroneamente");
-                    alert.showAndWait();
+                    error("Nominativi inseriti erroneamente");
                     flag = false;
                 }
 
@@ -392,12 +388,7 @@ public class ContattoController implements Initializable {
                     && mailControl(email3Field.getText()))) 
     
                 {
-    
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Errore");
-                    alert.setHeaderText(null); // Se non vuoi nessun header, puoi impostarlo a null
-                    alert.setContentText("Recapiti inseriti erroneamente");
-                    alert.showAndWait();
+                    error("Recapiti inseriti erroneamente");
                     flag = false;
     
     }
@@ -442,11 +433,7 @@ public class ContattoController implements Initializable {
 
 
             if (!nominativeControl(nameField.getText(), surnameField.getText())) {
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                     alert.setTitle("Errore");
-                    alert.setHeaderText(null); // Se non vuoi nessun header, puoi impostarlo a null
-                    alert.setContentText("Nominativi modificati erroneamente");
-                    alert.showAndWait();
+                    error("Nominativi modificati erroneamente");
                     flag = false;
                 }
 
@@ -461,11 +448,7 @@ public class ContattoController implements Initializable {
     
                 {
     
-                    Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setTitle("Errore");
-                    alert.setHeaderText(null); // Se non vuoi nessun header, puoi impostarlo a null
-                    alert.setContentText("Recapiti modificati erroneamente");
-                    alert.showAndWait();
+                    error("Recapiti modificati erroneamente");
                     flag = false;
     
     }
@@ -503,7 +486,13 @@ public class ContattoController implements Initializable {
     
     
     
-    
+    private void error(String error){
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("Errore");
+        alert.setHeaderText(null); // Se non vuoi nessun header, puoi impostarlo a null
+        alert.setContentText(error);
+        alert.showAndWait();
+    }
     
     
     
