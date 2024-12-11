@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane fx:id="contactPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ContattoController">
+   <children>
+      <VBox spacing="20">
+               <children>
+                  <ToolBar prefHeight="40.0" prefWidth="200.0">
+                     <items>
+                        <Button fx:id="exitButton" mnemonicParsing="false" onAction="#goBack" text="X" />
+                     </items>
+                  </ToolBar>
+                  <HBox prefHeight="100.0" prefWidth="300.0">
+                     <children>
+                          <Region HBox.hgrow="ALWAYS">
+                              <prefWidth>28.6</prefWidth>
+                          </Region>
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="142.8" spacing="10" HBox.hgrow="ALWAYS">
+                           <children>
+                              
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <TextField fx:id="nameField" prefHeight="27.0" prefWidth="95.0" promptText="Nome" />
+                                    <TextField fx:id="surnameField" prefHeight="27.0" prefWidth="95.0" promptText="Cognome" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label text="Numeri" />
+                                    <TextField fx:id="number1Field" prefHeight="27.0" prefWidth="95.0" />
+                                    <TextField fx:id="number2Field" prefHeight="27.0" prefWidth="95.0" />
+                                    <TextField fx:id="number3Field" prefHeight="27.0" prefWidth="95.0" />
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="200.0" prefWidth="100.0">
+                                 <children>
+                                    <Label text="E-mail" />
+                                    <TextField fx:id="email1Field" prefHeight="27.0" prefWidth="95.0" />
+                                    <TextField fx:id="email2Field" prefHeight="27.0" prefWidth="95.0" />
+                                    <TextField fx:id="email3Field" prefHeight="27.0" prefWidth="95.0" />
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
+                        <Region HBox.hgrow="ALWAYS">
+                      <prefWidth>28.6</prefWidth>
+                  </Region>
+                     </children>
+                  </HBox>
+                  <VBox alignment="TOP_CENTER" spacing="3">
+                     <children>
+                        <Button fx:id="removeButton" mnemonicParsing="false" onAction="#delete" prefHeight="30.0" prefWidth="100.0" text="Rimuovi" />
+                        <Button fx:id="modifyButton" mnemonicParsing="false" onAction="#modify" prefHeight="30.0" prefWidth="100.0" text="Modifica" />
+                        <Button fx:id="confirmButton" mnemonicParsing="false" onAction="#confirm" prefHeight="30.0" prefWidth="100.0" text="Conferma" />
+                        <Region prefHeight="30.0" />
+                     </children>
+                  </VBox>
+               </children>
+            </VBox>
+   </children>
+</StackPane>
