@@ -31,10 +31,12 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javax.swing.JOptionPane;
 
@@ -159,8 +161,11 @@ public class ContattoController implements Initializable {
         if (event.getCode() == javafx.scene.input.KeyCode.ENTER) {
             confirmButton.fire(); // Simula un click sul bottone
         }
+        else if(event.getCode() == javafx.scene.input.KeyCode.ESCAPE)
+            exitButton.fire();
         });
     
+
     }
     
     
@@ -230,6 +235,7 @@ public class ContattoController implements Initializable {
         confirmButton.setVisible(false);
         exitButton.setVisible(false);
         removeButton.setVisible(false);
+        removeButton.setDisable(true);
         disableModify(true);
         
         
