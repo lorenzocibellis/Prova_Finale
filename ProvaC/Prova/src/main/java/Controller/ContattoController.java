@@ -104,11 +104,6 @@ public class ContattoController implements Initializable {
     @FXML
     private javafx.scene.control.Button confirmButton;
 
-    /**
-     * Bottone per eliminare il contatto.
-     */
-    @FXML
-    private javafx.scene.control.Button removeButton;
 
     /**
      * Bottone per uscire dalla vista corrente.
@@ -188,7 +183,6 @@ public class ContattoController implements Initializable {
     this.rubricaPointer = r;
     typeController = false;
     modifyButton.setVisible(false);
-    removeButton.setVisible(false);
     
     
     
@@ -234,8 +228,6 @@ public class ContattoController implements Initializable {
         
         confirmButton.setVisible(false);
         exitButton.setVisible(false);
-        removeButton.setVisible(false);
-        removeButton.setDisable(true);
         disableModify(true);
         
         
