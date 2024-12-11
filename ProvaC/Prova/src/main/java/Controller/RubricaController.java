@@ -28,6 +28,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -176,8 +177,10 @@ public class RubricaController implements Initializable {
     @FXML
     private void delete(javafx.event.ActionEvent event) {
     
-        
-         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    ObservableList<Contatto> temp = rubricaList.getSelectionModel().getSelectedItems();
+    if(temp.size() == 0)
+        return;
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
     alert.setTitle("Attenzione");
     alert.setHeaderText(null); //
     alert.setContentText("Sei sicuro di voler eliminare il/i contatto/i?");
@@ -191,7 +194,7 @@ public class RubricaController implements Initializable {
     
         if (result.get() == ButtonType.YES) {
        
-       rubricaPointer.rimuoviContatto(rubricaList.getSelectionModel().getSelectedItems());
+       rubricaPointer.rimuoviContatto(temp);
             contattoPane.getChildren().clear();
     
         }

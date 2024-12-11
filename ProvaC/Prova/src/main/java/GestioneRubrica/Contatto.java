@@ -220,16 +220,15 @@ public class Contatto implements Comparable<Contatto> {
             throw new NullPointerException("Il contatto fornito è null");
         }
         
-        // Confronta i cognomi
-        int confronto = this.cognome.compareTo(c.getCognome());
-        //se il cognome dell'istanza attuale precede il cognome del contatto passato, allora ritorna un valore negativo
-        //se i cognomi sono uguali allora ritorna 0
-        //se il cognome dell'istanza attuale seguee il cognome del contatto passato, allora ritorna un valore positivo
-        if(confronto != 0){
-            return confronto; //confronta i cognomi e determina se this.cognome precede il cognome del contatto passato
-        }
-        
-        return this.nome.compareTo(c.getNome()); //richiamato se i cognomi sono uguali ed è necessario verificare i nomi
+      if(this.cognome.isEmpty()){
+          if(c.cognome.isEmpty())
+               return this.nome.compareTo(c.nome);
+          return -1;
+      }
+      else if(c.cognome.isEmpty())
+          return 1;
+      return this.cognome.compareTo(c.cognome);
+            
 
     
     }
