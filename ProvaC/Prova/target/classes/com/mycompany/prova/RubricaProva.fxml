@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane id="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RubricaController">
+   <children>
+      <SplitPane dividerPositions="0.6617886178861788" layoutY="-1.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
+        <items>
+            <VBox alignment="TOP_CENTER" prefHeight="469.0" prefWidth="407.0" spacing="10">
+               <children>
+                  <ToolBar prefHeight="40.0" prefWidth="200.0">
+                     <items>
+                        <Button fx:id="addButton" mnemonicParsing="false" onAction="#add" prefWidth="100.0" text="Aggiungi" />
+                        <Button fx:id="removeButton" mnemonicParsing="false" onAction="#delete" prefWidth="100.0" text="Rimuovi" />
+                        <Button fx:id="exportButton" mnemonicParsing="false" onAction="#exportRubrica" prefWidth="100.0" text="Esporta" />
+                        <Button fx:id="importButton" mnemonicParsing="false" onAction="#importRubrica" prefWidth="100.0" text="Importa" />
+                     </items>
+                  </ToolBar>
+                  <HBox prefWidth="200.0">
+                      <children>
+                     
+                        <TextField fx:id="researchField" prefHeight="22.0" prefWidth="318.0" HBox.hgrow="ALWAYS">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin></TextField>
+                        <Button fx:id="researchButton" mnemonicParsing="false" onAction="#research" prefWidth="70.0" text="Cerca">
+                           <HBox.margin>
+                              <Insets right="5.0" />
+                           </HBox.margin></Button>
+                    </children>
+                  </HBox>
+                  <TableView fx:id="rubricaList" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                    <columns>
+                      <TableColumn fx:id="cognomeClm" prefWidth="193.0" text="Cognome" />
+                      <TableColumn fx:id="nomeClm" prefWidth="199.0" text="Nome" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+                  <Button fx:id="exitButton" alignment="CENTER" mnemonicParsing="false" onAction="#goBack" prefWidth="300" text="exit">
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin></Button>
+               </children>
+            </VBox>
+            <StackPane fx:id="contattoPane" prefHeight="200.0" prefWidth="200.0">
+               <children>
+                           <fx:include source="Contatto.fxml" />
+               </children></StackPane>
+        </items>
+      </SplitPane>
+   </children>
+</StackPane>

@@ -52,7 +52,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class RubricaController extends Controller implements Initializable {
+public class RubricaController implements Initializable {
 
     @FXML
     private TableView<Contatto> rubricaList;
@@ -301,9 +301,8 @@ public class RubricaController extends Controller implements Initializable {
     @FXML
     private void goBack(javafx.event.ActionEvent event) {
     
-     javafx.stage.Stage stage = (javafx.stage.Stage) exitButton.getScene().getWindow();
+     ((javafx.stage.Stage) exitButton.getScene().getWindow()).close();
         
-      super.goBack(stage);
     
     }
     

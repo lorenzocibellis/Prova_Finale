@@ -39,7 +39,7 @@ import javafx.scene.layout.StackPane;
 import javax.swing.JOptionPane;
 
 
-public class ContattoController extends Controller implements Initializable {
+public class ContattoController implements Initializable {
 
 
     /**
@@ -307,9 +307,8 @@ public class ContattoController extends Controller implements Initializable {
     private void goBack(javafx.event.ActionEvent event) {
         // Da implementare
     
-      javafx.stage.Stage stage = (javafx.stage.Stage) exitButton.getScene().getWindow();
+      ((javafx.stage.Stage) exitButton.getScene().getWindow()).close();
         
-      super.goBack(stage);
     
     }
 
@@ -439,8 +438,7 @@ public class ContattoController extends Controller implements Initializable {
                     this.rubricaPointer.aggiungiContatto(contattoSelezionato);
 
                     
-                      javafx.stage.Stage stage = (javafx.stage.Stage) exitButton.getScene().getWindow();
-            super.goBack(stage);
+                      goBack(null);
                     
             
         }
