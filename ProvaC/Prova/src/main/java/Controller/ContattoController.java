@@ -358,30 +358,9 @@ public class ContattoController implements Initializable {
     }
     
     private boolean nominativeControl(String name, String surname){
-         boolean flag = true;
-    
-        if(surnameField.getText().isEmpty() && nameField.getText().isEmpty()) {
-            flag = false;
-        } else {
-   
-            if(!surnameField.getText().isEmpty()){
-                
-                
-                flag = Character.isLetter(surnameField.getText().charAt(0));
-                
-            }
-            
-            if(!nameField.getText().isEmpty()){
-                
-                
-                flag = Character.isLetter(nameField.getText().charAt(0));
-                
-            }
-        }
-            
-            return flag;
-    
-    
+        if (!name.isEmpty() && Character.isLetter(name.charAt(0)))
+            return true;
+        return ( !surname.isEmpty() && Character.isLetter(surname.charAt(0)) );
     }
     
     
