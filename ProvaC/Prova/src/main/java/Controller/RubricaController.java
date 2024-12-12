@@ -274,6 +274,10 @@ public class RubricaController implements Initializable {
        //creo la rubrica da importare
         Rubrica nuovaRubrica = rubricaPointer.importaRubrica(file.getAbsolutePath());
         
+        if(nuovaRubrica.getContactList().isEmpty()){
+            Avviso.info("Avviso", null, "Il file scelto contiene una rubrica vuota");
+            return
+        }
         //indico la nuova rubrica come quella principale
         rubricaPointer = nuovaRubrica;
 
@@ -299,7 +303,10 @@ public class RubricaController implements Initializable {
     @FXML
     private void exportRubrica(javafx.event.ActionEvent event) throws IOException {
     
-    
+   if(rubricaPointer.getContactList().isEmpty()){
+       Avviso.info("Avviso","Rubrica Vuota","Non è possibile esportare una rubrica vuota");
+       return;
+   }
    FileChooser fileChooser = new FileChooser();
 
    
