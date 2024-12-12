@@ -39,7 +39,6 @@ public class App extends Application {
      * 
      * @throws IOException Eccezione del metodo loadFXML
      */
-    
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("RubricaProva"));
