@@ -419,6 +419,7 @@ public class ContattoController implements Initializable {
            boolean flag = true;
            
 
+        
             if (!nominativeControl(nameField.getText(), surnameField.getText())) {
                     Avviso.errore("Errore","Nominativi inseriti erroneamente");
                     flag = false;
@@ -437,11 +438,12 @@ public class ContattoController implements Initializable {
                     Avviso.errore("Errore","Recapiti inseriti erroneamente");
                     flag = false;
     
-    }
+        }
 
 
 
                 if (flag) {
+                    
                         contactPointer = new Contatto();
                         contactPointer.setNome(nameField.getText());
                         contactPointer.setCognome(surnameField.getText());
@@ -451,11 +453,15 @@ public class ContattoController implements Initializable {
                         contactPointer.setNumero1(number1Field.getText());
                         contactPointer.setNumero2(number2Field.getText());
                         contactPointer.setNumero3(number3Field.getText());
-                        this.rubricaPointer.aggiungiContatto(contactPointer);
-
-                    
+                        
+                        //NON MI PIACE SI TROVI QUI, COMM AMMA FA
+                    if(!rubricaPointer.getContactList().contains(contactPointer)){ //controllo nominativi non duplicati
+                        this.rubricaPointer.aggiungiContatto(contactPointer); //aggiunta contatto alla rubrica
                         goBack(null);
-
+                    }
+                    else{
+                        Avviso.errore("Errore", "Nominativi già esistenti in rubrica...\nContatto non aggiunto"); //msg di errore
+                    }
         }
     
                 

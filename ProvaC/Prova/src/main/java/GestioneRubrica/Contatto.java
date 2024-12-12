@@ -238,6 +238,17 @@ public class Contatto implements Comparable<Contatto> {
 
     }
 
-
+    @Override
+    public boolean equals(Object o){
+        if(o == this)
+            return true;
+        if(o == null)
+            return false;
+        if(!(o instanceof Contatto))
+            return false;
+         Contatto c = (Contatto) o;
+         
+        return this.nome.equals(c.getNome()) && this.cognome.equals(c.getCognome());
+    }
 
 }

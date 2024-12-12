@@ -68,6 +68,7 @@ public class Rubrica {
     */
     public void aggiungiContatto(Contatto c){
       
+            
         //aggiunta contatto alla lista di contatti
          this.contactList.add(c);
         
