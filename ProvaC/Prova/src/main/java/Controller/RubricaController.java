@@ -158,6 +158,7 @@ public class RubricaController implements Initializable {
         //permetto la selezione multipla di contatti all'interno della tabella (CTRL + clickMouse)
         rubricaList.getSelectionModel().setSelectionMode(javafx.scene.control.SelectionMode.MULTIPLE);
         
+        //rendo invisibile il tasto di reset della ricerca finchè il campo di ricerca è vuoto
         resetResearch.visibleProperty().bind(Bindings.createBooleanBinding(
                 () -> (!researchField.getText().isEmpty()), researchField.textProperty()));
         
