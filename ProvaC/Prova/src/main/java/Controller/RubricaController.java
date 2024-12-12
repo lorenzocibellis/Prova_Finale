@@ -276,7 +276,7 @@ public class RubricaController implements Initializable {
         
         if(nuovaRubrica.getContactList().isEmpty()){
             Avviso.info("Avviso", null, "Il file scelto contiene una rubrica vuota");
-            return
+            return;
         }
         //indico la nuova rubrica come quella principale
         rubricaPointer = nuovaRubrica;
