@@ -325,18 +325,36 @@ public class RubricaController implements Initializable {
     
     }
 
+    /**
+     * @brief Ricerca contatti
+     * 
+     * Questo metodo permette la ricerca dei contatti tramite una stringa di testo
+     * 
+     * @param event L'evento che ha generato l'operazione di ricerca
+     */
     @FXML
     private void research(javafx.event.ActionEvent event) {
     
-    if(!researchField.getText().isEmpty())
-            rubricaList.setItems(rubricaPointer.ricercaContatti(researchField.getText()).getContactList());
+    if(!researchField.getText().isEmpty()) //controllo che la barra ricerca sia vuota
+        
+            rubricaList.setItems(rubricaPointer.ricercaContatti(researchField.getText()).getContactList()); //visualizzo tutta la rubrica
+    
         else
-            rubricaList.setItems(rubricaPointer.getContactList());
+        
+            rubricaList.setItems(rubricaPointer.getContactList()); //visualizzo la sottoRubrica
     
     
     
     }
 
+    /**
+     * @brief Chiude l'interfaccia del controller
+     *
+     * Questo metodo viene invocato quando l'utente preme il bottone per uscire dall'interfaccia.
+     * Come conseguenza l'interfaccia viene chiusa.
+     *
+     * @param event L'evento che ha generato l'azione di chiusura.
+     */
     @FXML
     private void goBack(javafx.event.ActionEvent event) {
     
@@ -345,6 +363,14 @@ public class RubricaController implements Initializable {
     
     }
 
+    /**
+     * @brief Metodo reset ricerca
+     * 
+     * Questo Metodo permette il reset della ricerca, mostrando nuovamente la rubrica "originale" 
+     * e svuotando la barra ricerca
+     * 
+     * @param event L'evento che ha generato l'operazione di reset 
+     */
     @FXML
     private void resetResearch(ActionEvent event) {
         
