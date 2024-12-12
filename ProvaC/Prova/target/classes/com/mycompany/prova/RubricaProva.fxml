@@ -36,8 +36,8 @@
                   </HBox>
                   <TableView fx:id="rubricaList" prefHeight="200.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                     <columns>
-                      <TableColumn fx:id="cognomeClm" prefWidth="193.0" text="Cognome" />
-                      <TableColumn fx:id="nomeClm" prefWidth="199.0" text="Nome" />
+                      <TableColumn fx:id="cognomeClm" editable="false" prefWidth="193.0" sortable="false" text="Cognome" />
+                      <TableColumn fx:id="nomeClm" editable="false" prefWidth="199.0" sortable="false" text="Nome" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

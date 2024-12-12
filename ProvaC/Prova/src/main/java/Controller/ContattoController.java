@@ -6,7 +6,6 @@
  *    Questa classe si occupa della gestione dell'interfaccia utente per interagire
  *        con un oggetto {@link Contatto.java}. Permette di  modificare, confermare, eliminare e
  *        gestire le operazioni sui dati del contatto.
- *        Estende la classe {@link Controller.java} da cui ne eredita i metodi {@code display} e {@code goBack }.
  * 
  * @see GestioneRubrica.Rubrica
  * @see Controller.Controller
@@ -20,31 +19,27 @@ package Controller;
 import GestioneRubrica.Avviso;
 import GestioneRubrica.Contatto;
 import GestioneRubrica.Rubrica;
-import java.awt.Button;
-import java.awt.TextField;
-import java.awt.event.ActionEvent;
-import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 import javafx.beans.binding.Bindings;
-import javafx.beans.binding.BooleanBinding;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TableView;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
-import javax.swing.JOptionPane;
 
 
 public class ContattoController implements Initializable {
 
-
+    /**
+     * Pannello di base sul quale è costruito il Controller
+     */
+    @FXML
+    private StackPane contactPane;
+    
     /**
      * Campo di testo per il nome del contatto.
      */
@@ -105,23 +100,35 @@ public class ContattoController implements Initializable {
     @FXML
     private javafx.scene.control.Button confirmButton;
 
-
     /**
      * Bottone per uscire dalla vista corrente.
      */
     @FXML
     private javafx.scene.control.Button exitButton;
 
+    /**
+     * Puntatore alla rubrica a cui appartiene il contatto
+     */
     private Rubrica rubricaPointer;
     
-    private Contatto contattoSelezionato;
+    /**
+     * Puntatore al contatto su cui il controller lavora
+     */
+    private Contatto contactPointer;
     
+    /**
+     * Tipo del controller: 
+     * -false se il controller gestisce l'aggiunta del contatto alla rubrica
+     * -true se il controller gestisce la visualizzazione e modifica del contatto
+     */
     private boolean typeController;
     
+    /**
+     * puntatore alla tabella in cui il contatto è mostrato
+     */
     private TableView<Contatto> tablePointer;
     
-    @FXML
-    private StackPane contactPane;
+    
     
    
     
@@ -139,7 +146,7 @@ public class ContattoController implements Initializable {
      @Override
     public void initialize(URL location, ResourceBundle resources) {
     
-   
+    //inizializzazione stringhe nei campi di testo
     nameField.setText("");
     surnameField.setText("");
     number1Field.setText("");
@@ -148,17 +155,22 @@ public class ContattoController implements Initializable {
     email1Field.setText("");
     email2Field.setText("");
     email3Field.setText("");
-    contattoSelezionato = null;
     
+    //inizializzazione puntatore contatto e rubrica
+    contactPointer = null;
+    rubricaPointer = null;
+    
+    //creazione binding tra pulsante conferma e campi di testo nome e cognome
     confirmButton.disableProperty().bind(Bindings.createBooleanBinding(
             () -> (nameField.getText().isEmpty() && surnameField.getText().isEmpty()), nameField.textProperty(), surnameField.textProperty()));
     
+    //gestione eventi da tastiera
     contactPane.setOnKeyPressed(event -> {
-        if (event.getCode() == javafx.scene.input.KeyCode.ENTER) {
-            confirmButton.fire(); // Simula un click sul bottone
-        }
-        else if(event.getCode() == javafx.scene.input.KeyCode.ESCAPE)
-            exitButton.fire();
+        if (event.getCode() == javafx.scene.input.KeyCode.ENTER) //gestione evento tasto ENTER
+            confirmButton.fire(); // Simula un click sul bottone confirm
+        
+        else if(event.getCode() == javafx.scene.input.KeyCode.ESCAPE)  //gestione evento tasto ESCAPE
+            exitButton.fire(); // Simula un click sul bottone exit
         });
     
 
@@ -168,24 +180,25 @@ public class ContattoController implements Initializable {
     /**
      * @brief Imposta il controller con i riferimenti e inizializza i componenti.
      *
-     *        Questo metodo permette di configurare il controller e i suoi componenti
-     *        per il funzionamento corretto dell'interfaccia utente.
+     * Questo metodo permette di configurare il controller e i suoi componenti
+     * per il funzionamento corretto dell'interfaccia utente.
      * 
-     *  @param r il riferimento alla rubrica.
+     * @param r il riferimento alla rubrica.
      * 
      * @pre r non deve essere null.
      * 
      * @post Il controller conterrà il riferimento alla rubrica su cui lavorare.
      */
     public void setController(Rubrica r) {
-        // Da implementare
-    
-   
+        
+    //salvataggio puntatore alla rubrica
     this.rubricaPointer = r;
+    
+    //definizione tipo di controller
     typeController = false;
+    
+    //reso il bottone di modifica invisibile
     modifyButton.setVisible(false);
-    
-    
     
     }
 
@@ -201,34 +214,40 @@ public class ContattoController implements Initializable {
      * @post il controller conterrà le informazioni di c.
      */
     public void setController(Contatto c, Rubrica r, TableView<Contatto> table) {
-         
+        
+        //salvataggio puntatore rubrica
         rubricaPointer=r;
+        
+        //definizione tipo di controller
         typeController = true;
         
+        //salvataggio puntatore alla tabella di visualizzazione del contatto
         this.tablePointer = table;
         
         
         // Memorizza il contatto passato al controller
-        this.contattoSelezionato = c;
+        this.contactPointer = c;
 
         // Popola i campi della GUI con i dati del contatto
         nameField.setText(c.getNome());
         surnameField.setText(c.getCognome());
-
-        // Gestisci l'array di numeri
         String[] numeri = c.getNumeri();
         number1Field.setText(numeri[0]);
         number2Field.setText(numeri[1]);
         number3Field.setText(numeri[2]);
-
-        // Gestisci l'array di email
         String[] emails = c.getEmails();
         email1Field.setText(emails[0]);
         email2Field.setText(emails[1]);
         email3Field.setText(emails[2]);
         
+        //reso il bottone di conferma invisibile
         confirmButton.setVisible(false);
+        
+        //reso il bottone di uscita invisibile e inutilizzabile
         exitButton.setVisible(false);
+        exitButton.setDisable(false);
+        
+        //invocato metodo disableModify con attributo "true"
         disableModify(true);
         
         
@@ -236,10 +255,14 @@ public class ContattoController implements Initializable {
     }
 
     /**
-     * @brief Disabilita l'interazione con i campi di testo
+     * @brief Gestisce l'interazione con i campi di testo
      *
-     * Il metodo disabilita l'interazione con i campi di testo in modo che essi siano 
-     * accedibili dall'utente in modalità di sola lettura
+     * Il metodo gestisce l'interazione con i campi di testo in modo che si renda
+     * possibile/impossibile la loro modifica
+     * 
+     * @param disable Permette di definire l'abilitazione o la disabilitazione dei campi:
+     *                -true: disabilita
+     *                -false: abilita
      *        
      */
     public void disableModify(boolean disable) {
@@ -256,87 +279,86 @@ public class ContattoController implements Initializable {
     }
 
     /**
-     * @brief Conferma le modifiche al contatto.
+     * @brief Abilita modifiche al contatto
      *
-     *        Questo metodo viene invocato quando l'utente preme il bottone di conferma.
-     *        Le modifiche ai dati del contatto vengono validate e salvate.
+     * Questo metodo viene invocato quando l'utente preme il bottone di modifica durante la visualizzazione del contatto.
+     * I campi di testo venogno abilitati alla modifica.
      *
-     * @param c l'evento che ha generato l'azione di conferma.
+     * @param c L'evento che ha generato l'azione di conferma.
      */
     @FXML
     private void modify(javafx.event.ActionEvent event) {
 
+        //si rende invisibile il bottone di modifica
         modifyButton.setVisible(false);
+        
+        //si rende visibile il bottone di conferma
         confirmButton.setVisible(true);
         
+        //viene invocato il metodo disable modify con attributo "false"
         disableModify(false);
         
 
     }
 
     /**
-     * @brief Abilita la modifica dei dati del contatto.
+     * @brief Chiude l'interfaccia del controller
      *
-     *        Questo metodo viene invocato quando l'utente preme il bottone di modifica.
-     *        I campi di input diventano modificabili per permettere all'utente di,eventualmente,
-     *        modificare i dati.
+     * Questo metodo viene invocato quando l'utente preme il bottone per uscire dall'interfaccia.
+     * Come conseguenza l'interfaccia viene chiusa.
      *
-     * @param c l'evento che ha generato l'azione di modifica.
-     */
-    @FXML
-    private void delete(javafx.event.ActionEvent event) {
-        ObservableList<Contatto> list;
-        list = FXCollections.observableArrayList();
-        list.add(contattoSelezionato);
-        rubricaPointer.rimuoviContatto(list);
-        contactPane.getChildren().clear();
-        
-
-    }
-
-    /**
-     * @brief Elimina il contatto corrente.
-     *
-     *        Questo metodo viene invocato quando l'utente preme il bottone per eliminare uno o più contatti.
-     *        Il contatto o i contatti selezionati vengono rimossi dalla lista dei contatti gestita dall'applicazione.
-     *
-     * @param c l'evento che ha generato l'azione di eliminazione.
+     * @param event L'evento che ha generato l'azione di chiusura.
      */
     @FXML
     private void goBack(javafx.event.ActionEvent event) {
-        // Da implementare
-    
+        
+        //get della finestra di visualizzazione, con conseguente casting della finestra come Stage per invocare il metodo di chiusura
       ((javafx.stage.Stage) exitButton.getScene().getWindow()).close();
         
     
     }
 
+    
+    /**
+     * @brief Conferma l'aggiunta o la modifica del contatto
+     * 
+     * Questo metodo viene invocato quando l'utente preme il bottone di conferma.
+     * L'azione invocata dal metodo cambia in base al tipo di controller settato.
+     * 
+     * @param event L'evento che ha generato l'azione di conferma
+     */
     @FXML
     private void confirm(javafx.event.ActionEvent event) {
     
-        
-        
-        if(!typeController)
+
+        if(!typeController) //controllo tipo di controller
           confAdd();
        else
          confMod();
-            
-        
+ 
     }
     
+    /**
+     * @brief Controllo numero di telefono
+     * 
+     * Questo metodo permette il controllo di una stringa per accertarsi sia un numero di telefono
+     * 
+     * @param number La stringa da controllare
+     * @return Il risultato del controllo
+     */
     private boolean numberControl(String number){
         
         
-          if(number.isEmpty()){
+          if(number.isEmpty()){ //controllo che la stringa sia vuota
             return true;
         }
         
         
-        if(number.length() != 10)
+        if(number.length() != 10) //controllo della lunghezza della stringa
             return false;
         
         
-        for(int i = 0 ; i < 10 ; i++){
+        for(int i = 0 ; i < 10 ; i++){ //controllo che i caratteri della stringa siano numeri
             if(!Character.isDigit(number.charAt(i)))
                 return false;
         }
@@ -346,16 +368,44 @@ public class ContattoController implements Initializable {
     
     }
     
+    /**
+     * @brief Controllo indirizzo posta elettronica
+     * 
+     * Questo metodo permette di controllare che la stringa passata sia concorde con le regole generali
+     * di un indirizzo mail
+     * 
+     * @param mail La stringa da controllare
+     * @return Il risultato del controllo
+     */
     private boolean mailControl(String mail){
-        if (mail.isEmpty())
+        if (mail.isEmpty()) //controllo che la stringa sia vuota
             return true;
-        String emailRegex = "^[a-zA-Z-.0-9]+@[a-z]+[.]+[a-zA-Z]{2,}$";
+        
+        //genero una stringa contenente le regole generali di un indirizzo e-mail
+        String emailRegex = "^[a-zA-Z-.0-9]+@[a-z]+[.]+[a-zA-Z]{2,}$"; 
        
+        //creo un oggetto di tipo Pattern per rendere utilizzabile e confrontabile la stringa emailRegex
         Pattern pattern = Pattern.compile(emailRegex);
       
+        //controllo che la stringa segua le regole definite in emailRegex
         return pattern.matcher(mail).matches();
     }
     
+    /**
+     * @brief Controllo nominativo inserito
+     * 
+     * Questo metodo permette di controllare che le stringhe nome e cognome siano un nominativo valido
+     * 
+     * @param name La stringa nome da controllare
+     * @param surname La stringa cognome da controllare
+     * 
+     * @pre Una tra le stringhe passate non deve essere vuota
+     * @pre Le stringhe non devono essere null
+     * 
+     * @post Ritorno risultato del controllo
+     * 
+     * @return Il risultato del controllo
+     */
     private boolean nominativeControl(String name, String surname){
         if (!name.isEmpty() && !Character.isLetter(name.charAt(0)))
             return false;
@@ -395,21 +445,20 @@ public class ContattoController implements Initializable {
 
 
                 if (flag) {
-                        contattoSelezionato = new Contatto();
-                        contattoSelezionato.setNome(nameField.getText());
-                        contattoSelezionato.setCognome(surnameField.getText());
-                        contattoSelezionato.setEmail1(email1Field.getText());
-                        contattoSelezionato.setEmail2(email2Field.getText());
-                        contattoSelezionato.setEmail3(email3Field.getText());
-                        contattoSelezionato.setNumero1(number1Field.getText());
-                        contattoSelezionato.setNumero2(number2Field.getText());
-                        contattoSelezionato.setNumero3(number3Field.getText());
-                    this.rubricaPointer.aggiungiContatto(contattoSelezionato);
+                        contactPointer = new Contatto();
+                        contactPointer.setNome(nameField.getText());
+                        contactPointer.setCognome(surnameField.getText());
+                        contactPointer.setEmail1(email1Field.getText());
+                        contactPointer.setEmail2(email2Field.getText());
+                        contactPointer.setEmail3(email3Field.getText());
+                        contactPointer.setNumero1(number1Field.getText());
+                        contactPointer.setNumero2(number2Field.getText());
+                        contactPointer.setNumero3(number3Field.getText());
+                        this.rubricaPointer.aggiungiContatto(contactPointer);
 
                     
-                      goBack(null);
-                    
-            
+                        goBack(null);
+
         }
     
                 
@@ -422,7 +471,7 @@ public class ContattoController implements Initializable {
      private void confMod(){
         
          
-      if (contattoSelezionato == null) {
+      if (contactPointer == null) {
             System.out.println("Nessun contatto selezionato.");
             return;
         }    
@@ -456,14 +505,14 @@ public class ContattoController implements Initializable {
             
                 if (flag) {
                         
-                        contattoSelezionato.setNome(nameField.getText());
-                        contattoSelezionato.setCognome(surnameField.getText());
-                        contattoSelezionato.setEmail1(email1Field.getText());
-                        contattoSelezionato.setEmail2(email2Field.getText());
-                        contattoSelezionato.setEmail3(email3Field.getText());
-                        contattoSelezionato.setNumero1(number1Field.getText());
-                        contattoSelezionato.setNumero2(number2Field.getText());
-                        contattoSelezionato.setNumero3(number3Field.getText());
+                        contactPointer.setNome(nameField.getText());
+                        contactPointer.setCognome(surnameField.getText());
+                        contactPointer.setEmail1(email1Field.getText());
+                        contactPointer.setEmail2(email2Field.getText());
+                        contactPointer.setEmail3(email3Field.getText());
+                        contactPointer.setNumero1(number1Field.getText());
+                        contactPointer.setNumero2(number2Field.getText());
+                        contactPointer.setNumero3(number3Field.getText());
                   contactPane.setOnKeyPressed(event -> {
         if (event.getCode() == javafx.scene.input.KeyCode.ENTER) {
             confirmButton.fire(); // Simula un click sul bottone
