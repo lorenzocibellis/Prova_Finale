@@ -22,14 +22,17 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -96,6 +99,12 @@ public class RubricaController implements Initializable {
     private javafx.scene.control.Button researchButton;
     
     /**
+     * Bottone per resettare la ricerca della rubrica.
+     */
+    @FXML
+    private Button resetResearch;
+    
+    /**
      * Campo di testa per la ricerca dei contatti tramite sottostringa nella rubrica.
      */
     @FXML
@@ -116,6 +125,7 @@ public class RubricaController implements Initializable {
      * Puntatore al controller visualizzato sul "pannello del contatto".
      */
     ContattoController contattoController;
+    
     
     
     
@@ -147,7 +157,8 @@ public class RubricaController implements Initializable {
         //permetto la selezione multipla di contatti all'interno della tabella (CTRL + clickMouse)
         rubricaList.getSelectionModel().setSelectionMode(javafx.scene.control.SelectionMode.MULTIPLE);
         
-        
+        resetResearch.visibleProperty().bind(Bindings.createBooleanBinding(
+                () -> (!researchField.getText().isEmpty()), researchField.textProperty()));
         
        
         //gestisco L'evento di selezione singola e multipla dei contatti e lo associo alla tabella
@@ -198,7 +209,6 @@ public class RubricaController implements Initializable {
         
     }
 
-    @FXML
     private void openContact(javafx.event.ActionEvent event) throws IOException {
     
         Contatto temp = (Contatto) rubricaList.getSelectionModel().getSelectedItem();
@@ -333,18 +343,12 @@ public class RubricaController implements Initializable {
         
     
     }
-    
-    /**
-     * @brief Esporta i contatti della Rubrica in un file.
-     * 
-     * @param e evento che attiva l'esportazione
-     */
 
-
-    
-    
-    
-    
-
+    @FXML
+    private void resetResearch(ActionEvent event) {
+        
+        researchField.setText("");
+        rubricaList.setItems(rubricaPointer.getContactList());
+    }
    
 }

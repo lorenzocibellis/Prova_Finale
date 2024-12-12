@@ -32,9 +32,9 @@
                                     <children>
                                         <HBox prefWidth="200.0">
                                             <children>
-                                                <TextField fx:id="researchField" prefHeight="28.0" prefWidth="300.0" HBox.hgrow="ALWAYS" />
-                                                <Button fx:id="researchButton" mnemonicParsing="false" onAction="#research" text="Cerca" />
-                                                <Button fx:id="resetResearch" mnemonicParsing="false" onAction="#resetResearch" text="↻" />
+                                                <TextField fx:id="researchField" prefHeight="25.0" prefWidth="312.0" HBox.hgrow="ALWAYS" />
+                                                <Button fx:id="researchButton" mnemonicParsing="false" onAction="#research" prefHeight="32.0" prefWidth="57.0" text="Cerca" />
+                                                <Button fx:id="resetResearch" mnemonicParsing="false" onAction="#resetResearch" prefHeight="32.0" prefWidth="30.0" text="↻" />
                                             </children>
                                         </HBox>
                                         <TableView fx:id="rubricaList" VBox.vgrow="ALWAYS">
