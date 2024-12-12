@@ -170,9 +170,19 @@ public class Rubrica {
 
         //Try di apertura file e inizializzazione oggetto di tipo BufferedReader
         try (BufferedReader br = new BufferedReader(new FileReader(nomefile))) {
-            //inizializzazione stringa
+            
+            
+                  String firstLine = br.readLine(); 
+
+        // Controllo se la prima parola è "RUBRICA"
+        if (firstLine == null || !firstLine.trim().equalsIgnoreCase("RUBRICA")) 
+           return temp; // Ritorna una rubrica vuota in caso di errore
+        
+        
+            
             String line;
-            //inizializza BufferedReader per leggere linee
+            
+            //legge la prima riga di intestazione
             br.readLine(); 
 
             //ciclo di lettura linee
@@ -230,6 +240,7 @@ public class Rubrica {
      try(PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(nomefile)))) {   
             
             //Stampa su file della seguente linea
+            pw.println("RUBRICA");
             pw.println("COGNOME;NOME;NUMERO 1;NUMERO 2;NUMERO 3;EMAIL 1;EMAIL 2; EMAIL3");   
             
             //ripetizione ciclo per ogni contatto presente nella lista
