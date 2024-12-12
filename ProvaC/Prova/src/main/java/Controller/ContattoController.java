@@ -396,7 +396,7 @@ public class ContattoController implements Initializable {
      * @param name La stringa nome da controllare
      * @param surname La stringa cognome da controllare
      * 
-     * @pre Una tra le stringhe passate non deve essere vuota
+     * @pre Almeno una tra le stringhe passate non deve essere vuota
      * @pre Le stringhe non devono essere null
      * 
      * @post Ritorno risultato del controllo
@@ -414,60 +414,47 @@ public class ContattoController implements Initializable {
     
     
     
-      private void confAdd(){
+    private void confAdd(){
       
-           boolean flag = true;
+        boolean flag = true;
            
 
         
-            if (!nominativeControl(nameField.getText(), surnameField.getText())) {
-                    Avviso.errore("Errore","Errore Nominativi","Nominativi inseriti erroneamente");
-                    flag = false;
-                }
+        if (!nominativeControl(nameField.getText(), surnameField.getText())) {
+            Avviso.errore("Errore","Errore Nominativi","Nominativi inseriti erroneamente");
+            flag = false;
+        }
 
                 
     
-            if (!(numberControl(number1Field.getText())
-                    && numberControl(number2Field.getText())
-                    && numberControl(number3Field.getText())
-                    && mailControl(email1Field.getText())
-                    && mailControl(email2Field.getText())
-                    && mailControl(email3Field.getText()))) 
-    
-                {
-                    Avviso.errore("Errore","Errore Recapiti","Recapiti inseriti erroneamente");
-                    flag = false;
-    
+        if (!(numberControl(number1Field.getText())
+        && numberControl(number2Field.getText())
+        && numberControl(number3Field.getText())
+        && mailControl(email1Field.getText())
+        && mailControl(email2Field.getText())
+        && mailControl(email3Field.getText()))){
+            Avviso.errore("Errore","Errore Recapiti","Recapiti inseriti erroneamente");
+            flag = false;
         }
 
-
-
-                if (flag) {
-                    
-                        contactPointer = new Contatto();
-                        contactPointer.setNome(nameField.getText());
-                        contactPointer.setCognome(surnameField.getText());
-                        contactPointer.setEmail1(email1Field.getText());
-                        contactPointer.setEmail2(email2Field.getText());
-                        contactPointer.setEmail3(email3Field.getText());
-                        contactPointer.setNumero1(number1Field.getText());
-                        contactPointer.setNumero2(number2Field.getText());
-                        contactPointer.setNumero3(number3Field.getText());
+        if (flag) {
+            contactPointer = new Contatto();
+            contactPointer.setNome(nameField.getText());
+            contactPointer.setCognome(surnameField.getText());
+            contactPointer.setEmail1(email1Field.getText());
+            contactPointer.setEmail2(email2Field.getText());
+            contactPointer.setEmail3(email3Field.getText());
+            contactPointer.setNumero1(number1Field.getText());
+            contactPointer.setNumero2(number2Field.getText());
+            contactPointer.setNumero3(number3Field.getText());
                         
-                        //NON MI PIACE SI TROVI QUI, COMM AMMA FA
-                    if(!rubricaPointer.getContactList().contains(contactPointer)){ //controllo nominativi non duplicati
-                        this.rubricaPointer.aggiungiContatto(contactPointer); //aggiunta contatto alla rubrica
-                        goBack(null);
-                    }
-                    else{
-                        Avviso.errore("Errore", "Errore Nominativi","Nominativi già esistenti in rubrica...\nContatto non aggiunto"); //msg di errore
-                    }
-        }
-    
-                
-                
-          
-          
+            switch(rubricaPointer.aggiungiContatto(contactPointer)){
+                case 0: goBack(null); break;
+                case 1: Avviso.info("Attenzione", "Contatto Già Esistente", "Il nominativo inserito risulta già presente in rubrica"); break;
+                case 2: Avviso.errore("Errore", "Errore Aggiunta", "Non è stato possibile aggiungere il contatto alla rubrica"); break;
+                default: Avviso.errore("Errore" , "Valore Di Ritorno Non Riconosciuto", "Il valore di controllo non è stato riconosciuto");
+            }
+        }    
     }
     
     

@@ -239,6 +239,11 @@ public class Contatto implements Comparable<Contatto> {
     }
 
     @Override
+    public int hashCode(){
+        return (this.cognome + this.nome).hashCode();
+    }
+    
+    @Override
     public boolean equals(Object o){
         if(o == this)
             return true;

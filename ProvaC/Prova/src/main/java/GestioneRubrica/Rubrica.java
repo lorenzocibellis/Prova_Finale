@@ -52,10 +52,10 @@ public class Rubrica {
     /**
     *  @brief Aggiunge un contatto alla lista dei contatti.
     *
-    *Questo metodo consente di aggiungere un oggetto di tipo {@link Contatto.java} a una 
-    *         collezione o struttura dati (ad esempio, una lista). Se il contatto 
-    *         è già presente o se ci sono condizioni particolari per l'aggiunta (come 
-    *         valori null o duplicati), il metodo può gestirle restituendo un valore booleano.
+    * Questo metodo consente di aggiungere un oggetto di tipo {@link Contatto.java} a una 
+    * collezione o struttura dati (ad esempio, una lista). Se il contatto 
+    * è già presente o se ci sono condizioni particolari per l'aggiunta (come 
+    * valori null o duplicati), il metodo può gestirle restituendo un valore booleano.
     *
     * @param c il contatto da aggiungere, rappresentato come un oggetto {@link Contatto.java}.
     * 
@@ -63,19 +63,29 @@ public class Rubrica {
     * 
     * @post Il contatto è aggiunto alla rubrica.
     * 
+    * @return un valore intero in base alla riuscita o meno dell'operazione:
+    *         0 se l'operazione ha avuto successo;
+    *         1 se i nominativi già esistevano in rubrica
+    *         2 se il contatto non è stato aggiunto in rubrica per altro problema
     * 
-    * 
+    * @throws NullPointerException Eccezione per gestire il caso in cui c sia null
     */
-    public void aggiungiContatto(Contatto c){
+    public int aggiungiContatto(Contatto c){
+        c= null;
+      if(c == null)// controllo puntatore null
+          throw new NullPointerException("Puntatore contatto = null"); //Lancio eccezione
       
-            
-        //aggiunta contatto alla lista di contatti
-         this.contactList.add(c);
-        
-         //sorting della lista
-         Collections.sort(contactList);
-          
-        
+    if(contactList.contains(c))
+        return 1;
+
+    //aggiunta contatto alla lista di contatti
+
+     if(this.contactList.add(c)){//controllo aggiunta alla rubrica
+        //sorting della lista
+        Collections.sort(contactList);
+        return 0;
+     }
+     return 2;
     }
     
     /**
