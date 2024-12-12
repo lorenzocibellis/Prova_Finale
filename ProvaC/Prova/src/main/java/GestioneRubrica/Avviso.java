@@ -28,10 +28,10 @@ public class Avviso {
      * @param titolo Il titolo del pop-up di errore
      * @param avviso La stringa che deve comparire come corpo del pop-up
      */
-    public static void errore(String titolo, String avviso){
+    public static void errore(String titolo, String head, String avviso){
         Alert alert = new Alert(Alert.AlertType.ERROR); //creazione oggetto di tipo Alert
         alert.setTitle(titolo); //Set del titolo
-        alert.setHeaderText(null); // Set del titolo del corpo del pop-up
+        alert.setHeaderText(head); // Set del titolo del corpo del pop-up
         alert.setContentText(avviso); //set del corpo del pop-up
         alert.showAndWait(); //visualizzazione del pop-up e attesa della sua chiusura
     }
@@ -45,10 +45,10 @@ public class Avviso {
      * @param titolo Il titolo del pop-up informativo
      * @param avviso La stringa che deve comparire come corpo del pop-up
      */
-    public static void info(String titolo, String avviso){
+    public static void info(String titolo,  String head, String avviso){
         Alert alert = new Alert(Alert.AlertType.INFORMATION); //creazione oggetto di tipo Alert
         alert.setTitle(titolo); //Set del titolo
-        alert.setHeaderText(null); // Set del titolo del corpo del pop-up
+        alert.setHeaderText(head); // Set del titolo del corpo del pop-up
         alert.setContentText(avviso); //set del corpo del pop-up
         alert.showAndWait(); //visualizzazione del pop-up e attesa della sua chiusura
     }
@@ -62,10 +62,10 @@ public class Avviso {
      * @param titolo Il titolo del pop-up di conferma
      * @param avviso La stringa che deve comparire come corpo del pop-up
      */
-    public static boolean conferma(String titolo, String avviso){
+    public static boolean conferma(String titolo, String head, String avviso){
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION); //creazione oggetto di tipo Alert
     alert.setTitle(titolo); //Set del titolo
-    alert.setHeaderText(null); // Set del titolo del corpo del pop-up
+    alert.setHeaderText(head); // Set del titolo del corpo del pop-up
     alert.setContentText(avviso); //set del corpo del pop-up
 
   

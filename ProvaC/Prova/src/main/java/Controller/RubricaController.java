@@ -228,7 +228,7 @@ public class RubricaController implements Initializable {
     if(temp.isEmpty())
         return;
 
-    if (Avviso.conferma("Attenzione", "Sei sicuro di voler eliminare il/i contatto/i?")) {
+    if (Avviso.conferma("Attenzione", "Conferma Rimozione","Sei sicuro di voler eliminare il/i contatto/i?")) {
        
        rubricaPointer.rimuoviContatto(temp);
             contattoPane.getChildren().clear();
@@ -265,7 +265,7 @@ public class RubricaController implements Initializable {
             rubricaList.setItems(rubricaPointer.getContactList());
         
             
-                Avviso.info("Avviso", "La rubrica è stata importata con successo");
+                Avviso.info("Avviso", null, "La rubrica è stata importata con successo");
             
             
             
@@ -303,7 +303,7 @@ public class RubricaController implements Initializable {
     
         rubricaPointer.esportaRubrica(file.getAbsolutePath());
    
-        Avviso.info("Avviso", "La rubrica è stata esportata con successo");
+        Avviso.info("Avviso", null,"La rubrica è stata esportata con successo");
         
         
     }else{

@@ -421,7 +421,7 @@ public class ContattoController implements Initializable {
 
         
             if (!nominativeControl(nameField.getText(), surnameField.getText())) {
-                    Avviso.errore("Errore","Nominativi inseriti erroneamente");
+                    Avviso.errore("Errore","Errore Nominativi","Nominativi inseriti erroneamente");
                     flag = false;
                 }
 
@@ -435,7 +435,7 @@ public class ContattoController implements Initializable {
                     && mailControl(email3Field.getText()))) 
     
                 {
-                    Avviso.errore("Errore","Recapiti inseriti erroneamente");
+                    Avviso.errore("Errore","Errore Recapiti","Recapiti inseriti erroneamente");
                     flag = false;
     
         }
@@ -460,7 +460,7 @@ public class ContattoController implements Initializable {
                         goBack(null);
                     }
                     else{
-                        Avviso.errore("Errore", "Nominativi già esistenti in rubrica...\nContatto non aggiunto"); //msg di errore
+                        Avviso.errore("Errore", "Errore Nominativi","Nominativi già esistenti in rubrica...\nContatto non aggiunto"); //msg di errore
                     }
         }
     
@@ -484,7 +484,7 @@ public class ContattoController implements Initializable {
 
 
             if (!nominativeControl(nameField.getText(), surnameField.getText())) {
-                    Avviso.errore("Errore","Nominativi modificati erroneamente");
+                    Avviso.errore("Errore", "Errore Nominativi","Nominativi modificati erroneamente");
                     flag = false;
                 }
 
@@ -499,7 +499,7 @@ public class ContattoController implements Initializable {
     
                 {
     
-                    Avviso.errore("Errore","Recapiti modificati erroneamente");
+                    Avviso.errore("Errore", "Errore Recapiti","Recapiti modificati erroneamente");
                     flag = false;
     
     }
