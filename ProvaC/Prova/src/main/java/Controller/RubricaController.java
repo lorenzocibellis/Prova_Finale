@@ -22,6 +22,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
@@ -349,6 +350,11 @@ public class RubricaController implements Initializable {
         
         researchField.setText("");
         rubricaList.setItems(rubricaPointer.getContactList());
+        
+        Platform.runLater(() -> { //Cambia il focus all'apertura della schermata
+        researchField.requestFocus();
+        researchField.positionCaret(0); //posizione il cursore all'inizio del textField
+        });
     }
    
 }

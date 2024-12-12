@@ -22,6 +22,7 @@ import java.net.URL;
 import java.util.Collections;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
+import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -197,6 +198,11 @@ public class ContattoController implements Initializable {
     //reso il bottone di modifica invisibile
     modifyButton.setVisible(false);
     
+    Platform.runLater(() -> { //Cambia il focus all'apertura della schermata
+        nameField.requestFocus();
+        nameField.positionCaret(0); //posizione il cursore all'inizio del textField
+        });
+    
     }
 
     /**
@@ -294,6 +300,11 @@ public class ContattoController implements Initializable {
         
         //viene invocato il metodo disable modify con attributo "false"
         disableModify(false);
+        
+        Platform.runLater(() -> { //Cambia il focus all'apertura della schermata
+        nameField.requestFocus();
+        nameField.positionCaret(nameField.getText().length()); //posizione il cursore alla fine del testo del textField
+        });
         
 
     }
