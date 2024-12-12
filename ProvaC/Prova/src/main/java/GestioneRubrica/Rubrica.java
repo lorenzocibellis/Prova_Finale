@@ -71,16 +71,15 @@ public class Rubrica {
     * @throws NullPointerException Eccezione per gestire il caso in cui c sia null
     */
     public int aggiungiContatto(Contatto c){
-        c= null;
+        
       if(c == null)// controllo puntatore null
           throw new NullPointerException("Puntatore contatto = null"); //Lancio eccezione
       
-    if(contactList.contains(c))
+    if(contactList.contains(c)) //controllo contatto già presente
         return 1;
 
-    //aggiunta contatto alla lista di contatti
 
-     if(this.contactList.add(c)){//controllo aggiunta alla rubrica
+     if(this.contactList.add(c)){//aggiunta e controllo aggiunta alla rubrica
         //sorting della lista
         Collections.sort(contactList);
         return 0;
@@ -115,9 +114,6 @@ public class Rubrica {
    
     }
     
-    
-    
-    
     /**
      * @brief Restituzione riferimento della lista di contatti
      * 
@@ -132,11 +128,6 @@ public class Rubrica {
         
     }
 
-    
-    
-    
-    
-    
     /**
      * @brief Ricerca nella lista osservabile i contatti avente corrispondenza nel nominativo con la stringa inserita dall'utente
      * 
@@ -209,7 +200,9 @@ public class Rubrica {
             }
         } catch (IOException e) /*Cattura eccezione*/{
 
-            System.err.println("Errore durante la lettura del file: ");
+            System.err.println("Errore durante la lettura del file");
+            Avviso.errore("Errore", "Errore importazione", "Errore durante la lettura del file");
+            
         }
 
         return temp;
@@ -273,8 +266,8 @@ public class Rubrica {
             
         }catch (IOException e) /*Cattura eccezione*/{
         
-        System.err.println("Errore durante la scrittura del file: ");
-        
+        System.err.println("Errore durante la scrittura del file");
+        Avviso.errore("Errore", "Errore esportazione", "Errore durante la scrittura del file");
         }
         
     }
