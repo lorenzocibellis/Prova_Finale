@@ -37,7 +37,7 @@ public class App extends Application {
      * 
      * @param stage La finestra sulla quale mostrare l'interfaccia grafica
      * 
-     * @throws IOException Eccezione di errore di creazione della scena
+     * @throws IOException Eccezione del metodo loadFXML
      */
     
     @Override
@@ -48,10 +48,30 @@ public class App extends Application {
         scene.getRoot().requestFocus();
     }
 
+    /**
+     * @brief Setting della scena
+     * 
+     * Permette di settare il nodo Parent nella scena principale
+     * 
+     * @param fxml Il nome del file da cui ottenere in nodo principale
+     * 
+     * @throws IOException Eccezione del metodo loadFXML
+     */
     static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
+    /**
+     * @brief Caricamento nodo principale
+     * 
+     * Il metodo permette di ottenere il nodo Parent di un file fxml
+     * 
+     * @param fxml Il nome del file fxml da cui ottenere il nodo
+     * 
+     * @return Il nodo del file fxml specificato
+     * 
+     * @throws IOException Eccezione del caricamento del nodo Parent
+     */
     static Parent loadFXML(String fxml) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
