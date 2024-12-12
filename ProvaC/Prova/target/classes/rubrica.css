@@ -78,6 +78,6 @@
 }
 
 .table-view .table-row-cell:selected {
-   -fx-background-color: #4b4b4b; /* Sfondo grigio scuro per la riga selezionata */
+   -fx-background-color: #A9A9A9; /* Sfondo grigio scuro per la riga selezionata */
    -fx-text-fill: #FFFFFF;        /* Testo bianco per leggibilità */
 }
