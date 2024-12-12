@@ -45,6 +45,7 @@ public class App extends Application {
         scene = new Scene(loadFXML("RubricaProva"));
         stage.setScene(scene);
         stage.show();
+        scene.getRoot().requestFocus();
     }
 
     static void setRoot(String fxml) throws IOException {
