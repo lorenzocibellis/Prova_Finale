@@ -1,0 +1,78 @@
+.tool-bar {
+   -fx-background-color: #F5F5F5; /* Colore di sfondo */
+}
+
+.vbox {
+   -fx-background-color: #d3d3d3; /* Sfondo grigio chiaro */
+}
+
+.split-pane {
+   -fx-background-color: white; /* Sfondo bianco */
+}
+
+.split-pane *.split-pane-divider {
+   -fx-background-color: #8b0000; /* Divisore rosso scuro */
+   -fx-padding: 1px;
+}
+
+/* Bottoni */
+.button {
+   -fx-background-color: #8b0000; /* Sfondo */
+   -fx-text-fill: white;          /* Testo bianco */
+}
+
+#researchButton {
+   -fx-background-radius: 0;
+   -fx-background-radius: 0 5px 5px 0;
+   -fx-border-radius: 0 5px 5px 0;
+}
+
+/* Campi di testo */
+#researchField {
+   -fx-background-color: white;
+   -fx-border-color: #4b4b4b;      /* Bordo grigio scuro */
+   -fx-border-width: 0.5px;
+   -fx-prompt-text-fill: #4b4b4b;  /* Testo grigio scuro per il placeholder */
+   -fx-text-fill: #4b4b4b;         /* Testo grigio scuro */
+   -fx-background-radius: 5px 0 0 5px; /* Arrotonda solo gli angoli sinistri */
+   -fx-border-radius: 5px 0 0 5px;
+}
+
+/* Tabelle */
+.table-view {
+   -fx-border-color: #4b4b4b;       /* Bordo grigio scuro */
+   -fx-border-width: 1px;
+   -fx-background-color: #F5F5F5;   /* Sfondo grigio chiarissimo */
+}
+
+.table-view .column-header {
+   -fx-background-color: #8b0000; /* Sfondo rosso scuro */
+   -fx-border-color: #4b4b4b;     /* Bordo grigio scuro */
+   -fx-border-width: 0 0 1px 0;   /* Bordo inferiore */
+}
+
+.table-view .column-header .label {
+   -fx-text-fill: white;         /* Testo bianco */
+   -fx-font-weight: bold;        /* Testo in grassetto */
+}
+
+.table-view .placeholder {
+   -fx-text-fill: #4b4b4b; /* Testo grigio scuro per lo stato "vuoto" */
+}
+
+.table-view .table-row-cell {
+   -fx-text-fill: #4b4b4b; /* Testo grigio scuro */
+}
+
+.table-view .table-row-cell:odd {
+   -fx-background-color: #F5F5F5; /* Grigio chiarissimo per le righe dispari */
+}
+
+.table-view .table-row-cell:even {
+   -fx-background-color: #FFFFFF; /* Bianco per le righe pari */
+}
+
+.table-view .table-row-cell:selected {
+   -fx-background-color: #4b4b4b; /* Sfondo grigio scuro per la riga selezionata */
+   -fx-text-fill: #FFFFFF;        /* Testo bianco per leggibilità */
+}

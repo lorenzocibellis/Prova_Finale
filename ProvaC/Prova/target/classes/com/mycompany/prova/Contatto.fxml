@@ -8,59 +8,55 @@
 
 <StackPane fx:id="contactPane" stylesheets="@../../../contatto.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.ContattoController">
    <children>
-      <VBox spacing="10">
-               <children>
-                  <ToolBar prefHeight="40.0" prefWidth="200.0">
-                     <items>
-                        <Button fx:id="exitButton" mnemonicParsing="false" onAction="#goBack" stylesheets="@../../../../../../style.css" text="X" />
-                     </items>
-                  </ToolBar>
-                  <HBox prefHeight="100.0" prefWidth="300.0">
-                     <children>
-                          <Region prefHeight="278.0" HBox.hgrow="ALWAYS">
-                              <prefWidth>0.0</prefWidth>
-                          </Region>
+        <VBox spacing="10">
+            <children>
+                <ToolBar prefHeight="40.0" prefWidth="200.0">
+                    <items>
+                        <Button fx:id="exitButton" mnemonicParsing="false" onAction="#goBack" 
+                                stylesheets="@../../../../../../style.css" text="X" textFill="WHITE" />
+                    </items>
+                </ToolBar>
+                <HBox prefHeight="100.0" prefWidth="300.0">
+                    <children>
+                        <Region HBox.hgrow="ALWAYS" />
                         <VBox alignment="CENTER" prefHeight="200.0" prefWidth="142.8" spacing="50" HBox.hgrow="ALWAYS">
-                           <children>
-                              
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <TextField fx:id="nameField" prefHeight="27.0" prefWidth="95.0" promptText="Nome" />
-                                    <TextField fx:id="surnameField" prefHeight="27.0" prefWidth="95.0" promptText="Cognome" />
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Label text="NUMERI" textFill="WHITE" />
-                                    <TextField fx:id="number1Field" prefHeight="27.0" prefWidth="95.0" />
-                                    <TextField fx:id="number2Field" prefHeight="27.0" prefWidth="95.0" />
-                                    <TextField fx:id="number3Field" prefHeight="27.0" prefWidth="95.0" />
-                                 </children>
-                              </VBox>
-                              <VBox prefHeight="200.0" prefWidth="100.0">
-                                 <children>
-                                    <Label text="E-MAIL" textFill="WHITE" />
-                                    <TextField fx:id="email1Field" prefHeight="27.0" prefWidth="95.0" />
-                                    <TextField fx:id="email2Field" prefHeight="27.0" prefWidth="95.0" />
-                                    <TextField fx:id="email3Field" prefHeight="27.0" prefWidth="95.0" />
-                                 </children>
-                              </VBox>
-                           </children>
+                            <children>
+                                <VBox prefHeight="200.0" prefWidth="100.0">
+                                    <children>
+                                        <TextField fx:id="nameField" prefHeight="27.0" prefWidth="95.0" promptText="Nome" />
+                                        <TextField fx:id="surnameField" prefHeight="27.0" prefWidth="95.0" promptText="Cognome" />
+                                    </children>
+                                </VBox>
+                                <VBox prefHeight="200.0" prefWidth="100.0">
+                                    <children>
+                                        <Label text="NUMERI" textFill="#4b4b4b" />
+                                        <TextField fx:id="number1Field" prefHeight="27.0" prefWidth="95.0" />
+                                        <TextField fx:id="number2Field" prefHeight="27.0" prefWidth="95.0" />
+                                        <TextField fx:id="number3Field" prefHeight="27.0" prefWidth="95.0" />
+                                    </children>
+                                </VBox>
+                                <VBox prefHeight="200.0" prefWidth="100.0">
+                                    <children>
+                                        <Label text="E-MAIL" textFill="#4b4b4b" />
+                                        <TextField fx:id="email1Field" prefHeight="27.0" prefWidth="95.0" />
+                                        <TextField fx:id="email2Field" prefHeight="27.0" prefWidth="95.0" />
+                                        <TextField fx:id="email3Field" prefHeight="27.0" prefWidth="95.0" />
+                                    </children>
+                                </VBox>
+                            </children>
                         </VBox>
-                        <Region prefHeight="278.0" HBox.hgrow="ALWAYS">
-                      <prefWidth>0.0</prefWidth>
-                  </Region>
-                     </children>
-                  </HBox>
-                  <VBox alignment="TOP_CENTER" spacing="3">
-                     <children>
+                        <Region HBox.hgrow="ALWAYS" />
+                    </children>
+                </HBox>
+                <VBox alignment="TOP_CENTER" spacing="3">
+                    <children>
                         <Region prefHeight="20.0" />
                         <Button fx:id="modifyButton" mnemonicParsing="false" onAction="#modify" prefHeight="30.0" prefWidth="100.0" text="Modifica" />
                         <Button fx:id="confirmButton" mnemonicParsing="false" onAction="#confirm" prefHeight="30.0" prefWidth="100.0" text="Conferma" />
                         <Region prefHeight="30.0" />
-                     </children>
-                  </VBox>
-               </children>
-            </VBox>
-   </children>
+                    </children>
+                </VBox>
+            </children>
+        </VBox>
+    </children>
 </StackPane>

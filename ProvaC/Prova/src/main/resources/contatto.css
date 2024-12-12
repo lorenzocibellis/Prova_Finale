@@ -1,24 +1,26 @@
-
 #contactPane{
-   -fx-background-color: #4b4b4b;
+   -fx-background-color: #ffffff;
   }
   
+
+
   .tool-bar{
-   -fx-background-color: #4b4b4b; /* Colore di sfondo */
+   -fx-background-color: white; /* Colore di sfondo */
   }
   
+
   
   .button{
    -fx-background-color: #8b0000; /* Sfondo */
-      -fx-text-fill: white;       /* Angoli arrotondati */
+      -fx-text-fill: white;       
   }
-  
   
   
   
   #nameField, #surnameField, #number1Field, #number2Field, #number3Field, #email1Field, #email2Field, #email3Field{
-   -fx-background-color: #4b4b4b; /* Sfondo grigio chiaro */
-      -fx-border-color: transparent transparent #FFFFFF transparent; /* Solo bordo inferiore bianco */
-      -fx-border-width: 0 0 0.5px 0; /* Spessore: 0 sopra, 0 destra, 2px sotto, 0 sinistra */
-      -fx-prompt-text-fill: white;
+   -fx-background-color: white; 
+      -fx-border-color: transparent transparent #4b4b4b transparent; 
+      -fx-border-width: 0 0 0.5px 0; /* Spessore: 0 sopra, 0 destra, 0.5px sotto, 0 sinistra */
+      -fx-prompt-text-fill: #4b4b4b;
+      -fx-text-fill: #4b4b4b;
   }

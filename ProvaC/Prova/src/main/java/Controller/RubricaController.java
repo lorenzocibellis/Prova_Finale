@@ -206,12 +206,12 @@ public class RubricaController implements Initializable {
         if(temp == null)
             return;
         
-        contattoPane.setVisible(true);
-        FXMLLoader loader = App.getFXML("Contatto");
+    contattoPane.setVisible(true);
+    FXMLLoader loader = App.getFXML("Contatto");
     StackPane contactPane = loader.load();
 
     ContattoController controller = loader.getController();
-        controller.setController(temp, rubricaPointer, rubricaList);
+    controller.setController(temp, rubricaPointer, rubricaList);
     
 
     contattoPane.getChildren().clear();
@@ -229,9 +229,9 @@ public class RubricaController implements Initializable {
         return;
 
     if (Avviso.conferma("Attenzione", "Conferma Rimozione","Sei sicuro di voler eliminare il/i contatto/i?")) {
-       
-       rubricaPointer.rimuoviContatto(temp);
-            contattoPane.getChildren().clear();
+        
+        rubricaPointer.rimuoviContatto(temp);
+        contattoPane.getChildren().clear();
     
         }
         
