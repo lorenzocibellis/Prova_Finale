@@ -274,7 +274,7 @@ public class RubricaController implements Initializable {
        //creo la rubrica da importare
         Rubrica nuovaRubrica = rubricaPointer.importaRubrica(file.getAbsolutePath());
         
-        if(nuovaRubrica.getContactList().isEmpty()){
+        if(nuovaRubrica.getContactList().isEmpty()){//controllo che il file contenga una rubrica non vuota
             Avviso.info("Avviso", null, "Il file scelto contiene una rubrica vuota");
             return;
         }
@@ -303,23 +303,25 @@ public class RubricaController implements Initializable {
     @FXML
     private void exportRubrica(javafx.event.ActionEvent event) throws IOException {
     
-   if(rubricaPointer.getContactList().isEmpty()){
+   if(rubricaPointer.getContactList().isEmpty()){ //controllo che la rubrica non sia vuota
        Avviso.info("Avviso","Rubrica Vuota","Non è possibile esportare una rubrica vuota");
        return;
    }
+   //creo un oggetto di tipo FileChooser
    FileChooser fileChooser = new FileChooser();
 
-   
+   //indico il tipo di estensione con la quale esportare la rubrica
     FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("CSV Files (*.csv)", "*.csv");
     fileChooser.getExtensionFilters().add(filter);
     
+    //mostro a schermo l'interfaccia di esportazione del file
     File file = fileChooser.showSaveDialog(null); 
     
-       
+    //controllo che il file non sia null
     if(file != null){
     
     
-        rubricaPointer.esportaRubrica(file.getAbsolutePath());
+        rubricaPointer.esportaRubrica(file.getAbsolutePath()); //esporto la rubrica usando come nome il path completo
    
         Avviso.info("Avviso", null,"La rubrica è stata esportata con successo");
         
