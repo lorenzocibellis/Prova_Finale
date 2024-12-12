@@ -23,15 +23,23 @@ import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 
 public class App extends Application {
 
-        private static Scene scene;
-        
-   
+    private static Scene scene;
+
+    /**
+     * @brief Metodo standard per l'avvio del programma
+     * 
+     * Questo metodo  permette l'inizializzazione dell'interfaccia grafica di JavaFX
+     * 
+     * @param stage La finestra sulla quale mostrare l'interfaccia grafica
+     * 
+     * @throws IOException Eccezione di errore di creazione della scena
+     */
+    
     @Override
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("RubricaProva"), 640, 480);
@@ -48,10 +56,26 @@ public class App extends Application {
         return fxmlLoader.load();
     }
     
+    /**
+     * @brief Metodo per l'ottenimento del riferimento del file fxml
+     * 
+     * Questo metodo permette l'ottenimento del riferimento del file fxml specificato nella stringa
+     * 
+     * @param fxml Nome del file fxml da ottenere
+     * 
+     * @return L'oggetto FXMLLoader associato al file fxml 
+     */
     public static FXMLLoader getFXML(String fxml){
         return new FXMLLoader(App.class.getResource(fxml+".fxml"));
     }
 
+    /**
+     * @brief Metodo standard di java
+     * 
+     * Questo metodo permette l'avvio del programma
+     * 
+     * @param args eventuali argomenti passati da riga-comando 
+     */
     public static void main(String[] args) {
         launch();
     }
