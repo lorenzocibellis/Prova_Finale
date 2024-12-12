@@ -348,7 +348,10 @@ public class RubricaController implements Initializable {
     @FXML
     private void resetResearch(ActionEvent event) {
         
+        //resetta il testo del campo di ricerca
         researchField.setText("");
+        
+        //resetta la visualizzazione della lista
         rubricaList.setItems(rubricaPointer.getContactList());
         
         Platform.runLater(() -> { //Cambia il focus all'apertura della schermata
