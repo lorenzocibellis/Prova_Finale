@@ -67,10 +67,7 @@ public class Contatto implements Comparable<Contatto> {
         emails[0] = null;
         emails[1] = null;
         emails[2] = null;
-    
-    
-    
-    
+
     }
 
     /**
@@ -180,25 +177,7 @@ public class Contatto implements Comparable<Contatto> {
     public String[] getEmails() {
         return emails;
     }
-
-    /**
-     * @brief Modifica i dettagli del contatto.
-     * 
-     * Questo metodo permette di aggiornare le informazioni esistenti di un contatto.
-     */
-    public void modificaContatto() {
-        // Da implementare: definire come aggiornare i dettagli del contatto.
-    
-    
-    
-    
-    
-    
-    
-    
-    }
-
-    
+  
     /**
      * @brief Confronta questo contatto con un altro contatto basandosi sul cognome e sul nome.
      *
@@ -210,12 +189,11 @@ public class Contatto implements Comparable<Contatto> {
      * @return un valore negativo, zero o positivo se questo contatto è rispettivamente
      *         minore, uguale o maggiore rispetto al contatto specificato.
      * 
-     * @throws da determinare quali eccezioni usare, ad esempio
-     *         NullPointerException se il contatto fornito è {@code null}.
      */
     @Override
     public int compareTo(Contatto c) {
-     boolean thisHasNome = nome != null && !nome.isEmpty();
+        //Controlla che i campi nominativi dei due contatti non siano nè nulli nè vuoti
+        boolean thisHasNome = nome != null && !nome.isEmpty();
         boolean thisHasCognome = cognome != null && !cognome.isEmpty();
         boolean otherHasNome = c.nome != null && !c.nome.isEmpty();
         boolean otherHasCognome = c.cognome != null && !c.cognome.isEmpty();
