@@ -21,10 +21,15 @@
    -fx-text-fill: white;          /* Testo bianco */
 }
 
-#researchButton {
+#resetResearch{
    -fx-background-radius: 0;
    -fx-background-radius: 0 5px 5px 0;
    -fx-border-radius: 0 5px 5px 0;
+}
+
+#researchButton{
+   -fx-background-radius: 0;
+     -fx-border-radius: 0;
 }
 
 /* Campi di testo */

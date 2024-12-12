@@ -7,20 +7,20 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane id="AnchorPane" stylesheets="@../../../rubrica.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"  fx:controller="Controller.RubricaController">
+<StackPane id="AnchorPane" stylesheets="@../../../rubrica.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.RubricaController">
    <children>
         <SplitPane dividerPositions="0.5825105782792666" layoutY="-1.0" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="-1.0">
             <items>
                 <VBox alignment="TOP_CENTER" prefHeight="579.0" prefWidth="430.0" spacing="10">
                     <children>
-                        <ToolBar VBox.vgrow="ALWAYS" minWidth="300.0">
+                        <ToolBar minWidth="300.0" VBox.vgrow="ALWAYS">
                             <items>
                                 <HBox spacing="5.0" HBox.hgrow="ALWAYS">
                                     <children>
-                                        <Button fx:id="addButton" mnemonicParsing="false" onAction="#add" text="Aggiungi" HBox.hgrow="ALWAYS" maxWidth="Infinity" />
-                                        <Button fx:id="importButton" mnemonicParsing="false" onAction="#importRubrica" text="Importa" HBox.hgrow="ALWAYS" maxWidth="Infinity" />
-                                        <Button fx:id="removeButton" mnemonicParsing="false" onAction="#delete" text="Rimuovi" HBox.hgrow="ALWAYS" maxWidth="Infinity" />
-                                        <Button fx:id="exportButton" mnemonicParsing="false" onAction="#exportRubrica" text="Esporta" HBox.hgrow="ALWAYS" maxWidth="Infinity" />
+                                        <Button fx:id="addButton" maxWidth="Infinity" mnemonicParsing="false" onAction="#add" text="Aggiungi" HBox.hgrow="ALWAYS" />
+                                        <Button fx:id="importButton" maxWidth="Infinity" mnemonicParsing="false" onAction="#importRubrica" text="Importa" HBox.hgrow="ALWAYS" />
+                                        <Button fx:id="removeButton" maxWidth="Infinity" mnemonicParsing="false" onAction="#delete" text="Rimuovi" HBox.hgrow="ALWAYS" />
+                                        <Button fx:id="exportButton" maxWidth="Infinity" mnemonicParsing="false" onAction="#exportRubrica" text="Esporta" HBox.hgrow="ALWAYS" />
                                     </children>
                                 </HBox>
                             </items>
@@ -32,7 +32,8 @@
                                     <children>
                                         <HBox prefWidth="200.0">
                                             <children>
-                                                <TextField fx:id="researchField" prefHeight="28.0" prefWidth="343.0" HBox.hgrow="ALWAYS" />
+                                                <TextField fx:id="researchField" prefHeight="28.0" prefWidth="300.0" HBox.hgrow="ALWAYS" />
+                                                <Button fx:id="resetResearch" mnemonicParsing="false" onAction="#resetResearch" text="↻" />
                                                 <Button fx:id="researchButton" mnemonicParsing="false" onAction="#research" prefWidth="70.0" text="Cerca" />
                                             </children>
                                         </HBox>
