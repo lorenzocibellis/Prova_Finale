@@ -198,7 +198,7 @@ public class RubricaController implements Initializable {
         
     }
 
-    
+    @FXML
     private void openContact(javafx.event.ActionEvent event) throws IOException {
     
         Contatto temp = (Contatto) rubricaList.getSelectionModel().getSelectedItem();
@@ -225,10 +225,10 @@ public class RubricaController implements Initializable {
     private void delete(javafx.event.ActionEvent event) {
     
     ObservableList<Contatto> temp = rubricaList.getSelectionModel().getSelectedItems();
-    if(temp.size() == 0)
+    if(temp.isEmpty())
         return;
 
-        if (Avviso.conferma("Attenzione", "Sei sicuro di voler eliminare il/i contatto/i?")) {
+    if (Avviso.conferma("Attenzione", "Sei sicuro di voler eliminare il/i contatto/i?")) {
        
        rubricaPointer.rimuoviContatto(temp);
             contattoPane.getChildren().clear();
