@@ -212,35 +212,41 @@ public class RubricaController implements Initializable {
 
     private void openContact(javafx.event.ActionEvent event) throws IOException {
     
-        Contatto temp = (Contatto) rubricaList.getSelectionModel().getSelectedItem();
+        Contatto temp = (Contatto) rubricaList.getSelectionModel().getSelectedItem(); //Carica il contatto selezionato dalla tabella
                 
-        if(temp == null)
+        if(temp == null) //controllo che il contatto non sia null
             return;
         
-    contattoPane.setVisible(true);
-    FXMLLoader loader = App.getFXML("Contatto");
+    contattoPane.setVisible(true); //rendo visibile il pannello del contatto
+    
+    //carico il nodo Parent dal file fxml del contatto
+    FXMLLoader loader = App.getFXML("Contatto"); 
     StackPane contactPane = loader.load();
-
+ 
+    //creo e inizializzo il controller
     ContattoController controller = loader.getController();
     controller.setController(temp, rubricaPointer, rubricaList);
     
-
+    //Ripulisco il pannello del contatto e visualizzo l'interfaccia del contatto
     contattoPane.getChildren().clear();
     contattoPane.getChildren().add(contactPane);
-
-   
-        
+  
     }
 
     @FXML
     private void delete(javafx.event.ActionEvent event) {
     
+    //carico la lista di contatti da eliminare
     ObservableList<Contatto> temp = rubricaList.getSelectionModel().getSelectedItems();
-    if(temp.isEmpty())
+    
+    //controllo che la lista non sia nè null nè vuota
+    if(temp != null && temp.isEmpty())
         return;
 
+    //mostro il segnale di avviso e aspetto il risultato della conferma
     if (Avviso.conferma("Attenzione", "Conferma Rimozione","Sei sicuro di voler eliminare il/i contatto/i?")) {
         
+        //rimuovo il contatto e ripulisco il pannello del contatto
         rubricaPointer.rimuoviContatto(temp);
         contattoPane.getChildren().clear();
     
@@ -248,26 +254,27 @@ public class RubricaController implements Initializable {
         
     }
 
-    
-    
     @FXML
     private void importRubrica(javafx.event.ActionEvent event) throws IOException {
     
-    FileChooser fileChooser = new FileChooser();
+    FileChooser fileChooser = new FileChooser(); //creo l'oggetto FileChooser
         
-        
-    FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("CSV Files (*.csv)", "*.csv");
+    //indico le estensioni accettabili
+    FileChooser.ExtensionFilter filter = new FileChooser.ExtensionFilter("CSV Files (*.csv)", "*.csv"); 
     fileChooser.getExtensionFilters().add(filter);
 
 
+    //mostro a schermo la finestra di scelta del file
     File file = fileChooser.showOpenDialog(null);
-
+        //controllo che il file non sia null
         if (file != null) { 
             
             try {
-       
+                
+       //creo la rubrica da importare
         Rubrica nuovaRubrica = rubricaPointer.importaRubrica(file.getAbsolutePath());
         
+<<<<<<< Updated upstream
         if(nuovaRubrica.getContactList().isEmpty()){
             
             Avviso.info("Avviso", null, "Il file scelto contiene una rubrica vuota o non valida.");
@@ -278,12 +285,16 @@ public class RubricaController implements Initializable {
         
             rubricaPointer.rimuoviContatto(rubricaPointer.getContactList()); // rimuovi tutti i vecchi contatti in rubrica
             rubricaPointer = nuovaRubrica;
+=======
+        //indico la nuova rubrica come quella principale
+        rubricaPointer = nuovaRubrica;
+
+
+        rubricaList.setItems(rubricaPointer.getContactList());
+
+>>>>>>> Stashed changes
             
-            
-            rubricaList.setItems(rubricaPointer.getContactList());
-        
-            
-                Avviso.info("Avviso", null, "La rubrica è stata importata con successo");
+        Avviso.info("Avviso", null, "La rubrica è stata importata con successo");
             
             
             
