@@ -8,7 +8,6 @@
  *        gestire le operazioni sui dati del contatto.
  * 
  * @see GestioneRubrica.Rubrica
- * @see Controller.Controller
  * @see GestioneRubrica.Contatto
  */
 
@@ -24,8 +23,6 @@ import java.util.Collections;
 import java.util.ResourceBundle;
 import java.util.regex.Pattern;
 import javafx.beans.binding.Bindings;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
@@ -35,7 +32,7 @@ import javafx.scene.layout.StackPane;
 public class ContattoController implements Initializable {
 
     /**
-     * Pannello di base sul quale è costruito il Controller
+     * Pannello di base sul quale è costruito il Controller.
      */
     @FXML
     private StackPane contactPane;
@@ -95,7 +92,7 @@ public class ContattoController implements Initializable {
     private javafx.scene.control.Button modifyButton;
 
     /**
-     * Bottone per confermare le modifiche al contatto.
+     * Bottone per confermare l'operazione di aggiunta o modifica del contatto.
      */
     @FXML
     private javafx.scene.control.Button confirmButton;
@@ -107,24 +104,24 @@ public class ContattoController implements Initializable {
     private javafx.scene.control.Button exitButton;
 
     /**
-     * Puntatore alla rubrica a cui appartiene il contatto
+     * Puntatore alla rubrica a cui appartiene il contatto.
      */
     private Rubrica rubricaPointer;
     
     /**
-     * Puntatore al contatto su cui il controller lavora
+     * Puntatore al contatto su cui il controller lavora.
      */
     private Contatto contactPointer;
     
     /**
      * Tipo del controller: 
-     * -false se il controller gestisce l'aggiunta del contatto alla rubrica
-     * -true se il controller gestisce la visualizzazione e modifica del contatto
+     * -false se il controller gestisce l'aggiunta del contatto alla rubrica;
+     * -true se il controller gestisce la visualizzazione e modifica del contatto.
      */
     private boolean typeController;
     
     /**
-     * puntatore alla tabella in cui il contatto è mostrato
+     * puntatore alla tabella in cui il contatto è mostrato.
      */
     private TableView<Contatto> tablePointer;
     
@@ -136,13 +133,13 @@ public class ContattoController implements Initializable {
     /**
     * @brief Inizializza il controller al caricamento della scena.
     * 
-    * Questo metodo viene chiamato automaticamente dal framework JavaFX 
+    * Questo metodo viene chiamato automaticamente dal framework JavaFX
     * quando la scena associata a questo controller viene caricata.
     * 
     * @param location La posizione del file FXML associato al controller (può essere null se non fornito).
     * @param resources Le risorse internazionalizzate utilizzate per la scena (può essere null se non presenti).
     * 
-    * */
+    */
      @Override
     public void initialize(URL location, ResourceBundle resources) {
     

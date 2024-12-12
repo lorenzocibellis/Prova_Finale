@@ -6,7 +6,6 @@
  * Questa classe gestisce le interazioni con l'utente e le azioni sulla Rubrica.
  *
  * @see GestioneRubrica.Rubrica
- * @see Controller.Controller
  */
 
 
@@ -17,18 +16,13 @@ import GestioneRubrica.Avviso;
 import GestioneRubrica.Contatto;
 import GestioneRubrica.Rubrica;
 import com.mycompany.prova.App;
-import java.awt.Button;
-import java.awt.TextField;
-import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -36,19 +30,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.SplitPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyCodeCombination;
-import javafx.scene.input.KeyCombination;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Modality;
@@ -56,83 +41,144 @@ import javafx.stage.Stage;
 
 public class RubricaController implements Initializable {
 
-    @FXML
-    private TableView<Contatto> rubricaList;
-    @FXML
-    private TableColumn<Contatto, String> cognomeClm;
-    @FXML
-    private TableColumn<Contatto, String> nomeClm;
-
-    
-   
-    
-    private Rubrica rubricaPointer;
-    
-    @FXML
-    private javafx.scene.control.Button addButton;
-    @FXML
-    private javafx.scene.control.Button removeButton;
-    @FXML
-    private javafx.scene.control.Button importButton;
-    @FXML
-    private javafx.scene.control.Button exportButton;
-    @FXML
-    private javafx.scene.control.Button researchButton;
-    @FXML
-    private javafx.scene.control.TextField researchField;
-    @FXML
-    private javafx.scene.control.Button exitButton;
-            
-    
-    ContattoController contattoController;
+    /**
+     * Pannello di base sul quale è visualizzato il contatto.
+     */
     @FXML
     private StackPane contattoPane;
     
+    /**
+     * Tabella visualizzazione dei contatti.
+     */
+    @FXML
+    private TableView<Contatto> rubricaList;
+    
+    /**
+     * Colonna dei cognomi della tabella.
+     */
+    @FXML
+    private TableColumn<Contatto, String> cognomeClm;
+    
+    /**
+     * Colonna dei nomi della tabella.
+     */
+    @FXML
+    private TableColumn<Contatto, String> nomeClm;
+
+    /**
+     * Bottone di apertura pop-up per aggiunta contatto.
+     */
+    @FXML
+    private javafx.scene.control.Button addButton;
+    
+    /**
+     * Bottone per la rimozione del/dei contatto/i.
+     */
+    @FXML
+    private javafx.scene.control.Button removeButton;
+    
+    /**
+     * Bottone per l'importazione di rubrica da file esterno.
+     */
+    @FXML
+    private javafx.scene.control.Button importButton;
+    
+    /**
+     * Bottone per l'esportazione della rubrica su file esterno.
+     */
+    @FXML
+    private javafx.scene.control.Button exportButton;
+    
+    /**
+     * Bottone per la ricerca di contatti all'interno della rubrica.
+     */
+    @FXML
+    private javafx.scene.control.Button researchButton;
+    
+    /**
+     * Campo di testa per la ricerca dei contatti tramite sottostringa nella rubrica.
+     */
+    @FXML
+    private javafx.scene.control.TextField researchField;
+    
+    /**
+     * Bottone per chiusura dell'interfaccia grafica.
+     */
+    @FXML
+    private javafx.scene.control.Button exitButton;
+            
+    /**
+     * Puntatore alla rubrica gestita.
+     */
+    private Rubrica rubricaPointer;
+    
+    /**
+     * Puntatore al controller visualizzato sul "pannello del contatto".
+     */
+    ContattoController contattoController;
     
     
+    
+    /**
+    * @brief Inizializza il controller al caricamento della scena.
+    * 
+    * Questo metodo viene chiamato automaticamente dal framework JavaFX
+    * quando la scena associata a questo controller viene caricata.
+    * 
+    * @param location La posizione del file FXML associato al controller (può essere null se non fornito).
+    * @param resources Le risorse internazionalizzate utilizzate per la scena (può essere null se non presenti).
+    * 
+    */
      @Override
     public void initialize(URL location, ResourceBundle resources) {
     
+        //rendo invisibile il pannello del contatto
         contattoPane.setVisible(false);
+        
+        //creo la rubrica su cui lavorare
         this.rubricaPointer = new Rubrica();
         
          
-       
-        nomeClm.setCellValueFactory(s -> { return new SimpleStringProperty(s.getValue().getNome()); });   // freccetta, a sx c'è il parametro del metodo,e a dx il corpo del metodo con un eventuale restituzuione
-        cognomeClm.setCellValueFactory(new PropertyValueFactory("cognome"));  // dato questo nome va a vedere se esiste get seguito da surname, se esiste si fa restituire il valore e lo avvolge in una simple property
-
+       //lego le colonne della tabella ai campi nome e cognome dei contatti della rubrica 
+        nomeClm.setCellValueFactory(s -> { return new SimpleStringProperty(s.getValue().getNome()); });
+        cognomeClm.setCellValueFactory(new PropertyValueFactory("cognome"));  
+        rubricaList.setItems(rubricaPointer.getContactList());
         
-        rubricaList.setItems(rubricaPointer.getContactList());   // collega i dati della rubrica alla tableview
+        //permetto la selezione multipla di contatti all'interno della tabella (CTRL + clickMouse)
         rubricaList.getSelectionModel().setSelectionMode(javafx.scene.control.SelectionMode.MULTIPLE);
         
         
         
        
-        
+        //gestisco L'evento di selezione singola e multipla dei contatti e lo associo alla tabella
         EventHandler<MouseEvent> ClickHandler = event ->{
             if(event.isControlDown())
                 contattoPane.getChildren().clear();
             else
-                try {
-                        
+                try {  
                     openContact(null); //apre lo studente
 
                     } catch (IOException ex) {
                     Logger.getLogger(ContattoController.class.getName()).log(Level.SEVERE, null, ex);
                 }
         };
-        
         rubricaList.setOnMouseClicked(ClickHandler);
         
-        
-        
-        
     }
-    
-    
+     
+    /**
+     * @brief Metodo gestione aggiunta contatto
+     * 
+     * Questo metodo permette l'apertura di un pop-up per le operazioni di creazione e inserimento di un nuovo contatto nella tabella 
+     * 
+     * @param event L'evento che ha generato l'azione di aggiunta
+     * 
+     * @throws IOException Eccezione per la gestione di errori durante l'apertura della finestra di aggiunta del contatto
+     */
     @FXML
     private void add(javafx.event.ActionEvent event) throws IOException {
         
+        //Operazioni per apertura finestra di creazione
         FXMLLoader f = App.getFXML("Contatto");
         Parent root = f.load();
         Stage stage = new Stage();
@@ -140,15 +186,15 @@ public class RubricaController implements Initializable {
         stage.setScene(scene);
         stage.initModality(Modality.APPLICATION_MODAL);
         
-        
+        //Creazione del controller del contatto
         ContattoController controller = f.getController(); 
-    if (controller != null) {
-        controller.setController(this.rubricaPointer); 
-    } else {
-        System.out.println("Il controller è nullo");
-    }
+        if (controller != null) { //controllo effettiva creazione del controller
+            controller.setController(this.rubricaPointer); 
+        } else {
+            System.out.println("Il controller è nullo");
+        }
        
-    stage.show();
+        stage.show(); //visualizzazione pop-up di aggiunta
         
     }
 
