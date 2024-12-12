@@ -274,38 +274,20 @@ public class RubricaController implements Initializable {
        //creo la rubrica da importare
         Rubrica nuovaRubrica = rubricaPointer.importaRubrica(file.getAbsolutePath());
         
-<<<<<<< Updated upstream
-        if(nuovaRubrica.getContactList().isEmpty()){
-            
-            Avviso.info("Avviso", null, "Il file scelto contiene una rubrica vuota o non valida.");
-            
-            return;
-        }
-           
-        
-            rubricaPointer.rimuoviContatto(rubricaPointer.getContactList()); // rimuovi tutti i vecchi contatti in rubrica
-            rubricaPointer = nuovaRubrica;
-=======
         //indico la nuova rubrica come quella principale
         rubricaPointer = nuovaRubrica;
 
-
+        //lego la tabella alla nuova lista di contatti
         rubricaList.setItems(rubricaPointer.getContactList());
 
->>>>>>> Stashed changes
             
         Avviso.info("Avviso", null, "La rubrica è stata importata con successo");
-            
-            
-            
     } catch (IOException e) {
         
         System.err.println("Errore durante l'importazione del file: " + e.getMessage());
      
     }
-        
-        
-        
+
         } else {
     
                 System.out.println("Selezione del file annullata.");
@@ -317,8 +299,6 @@ public class RubricaController implements Initializable {
     @FXML
     private void exportRubrica(javafx.event.ActionEvent event) throws IOException {
     
-        
-        if(!rubricaPointer.getContactList().isEmpty()){
     
    FileChooser fileChooser = new FileChooser();
 
@@ -342,14 +322,6 @@ public class RubricaController implements Initializable {
         System.out.println("Esportazione annullata");
         
     }
-    
-        }else{
-            
-             Avviso.info("Avviso", null,"Non è possibile esportare una rubrica vuota");
-            
-        }
-            
-    
     
     }
 
