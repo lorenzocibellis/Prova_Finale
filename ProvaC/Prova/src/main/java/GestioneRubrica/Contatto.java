@@ -192,50 +192,21 @@ public class Contatto implements Comparable<Contatto> {
      */
     @Override
     public int compareTo(Contatto c) {
-        //Controlla che i campi nominativi dei due contatti non siano nè nulli nè vuoti
-        boolean thisHasNome = nome != null && !nome.isEmpty();
-        boolean thisHasCognome = cognome != null && !cognome.isEmpty();
-        boolean otherHasNome = c.nome != null && !c.nome.isEmpty();
-        boolean otherHasCognome = c.cognome != null && !c.cognome.isEmpty();
 
-        // Categoria 1: nome e cognome presenti
-        if (thisHasNome && thisHasCognome && !(otherHasNome && otherHasCognome)) {
-            return -1;
+        //controllo che i cognomi siano uguali;
+        int report = this.getCognome().compareToIgnoreCase(c.cognome);
+        if(report == 0){
+            return this.nome.compareToIgnoreCase(c.getNome());
         }
-        if (!(thisHasNome && thisHasCognome) && otherHasNome && otherHasCognome) {
-            return 1;
+        else{
+            if(this.cognome.isEmpty()) //se il primo contatto non ha cognome
+                return 1;
+                
+            if(c.getCognome().isEmpty()) //se il secondo contatto non ha cognome
+                return -1;
         }
-
-        // Categoria 2: solo cognome presente
-        if (thisHasCognome && !thisHasNome && !(otherHasCognome && !otherHasNome)) {
-            return -1;
-        }
-        if (!(thisHasCognome && !thisHasNome) && otherHasCognome && !otherHasNome) {
-            return 1;
-        }
-
-        // Categoria 3: solo nome presente
-        if (thisHasNome && !thisHasCognome && !(otherHasNome && !otherHasCognome)) {
-            return -1;
-        }
-        if (!(thisHasNome && !thisHasCognome) && otherHasNome && !otherHasCognome) {
-            return 1;
-        }
-
-        // Ordinamento alfabetico all'interno della stessa categoria
-        if (thisHasCognome && otherHasCognome) {
-            int compareCognome = cognome.compareToIgnoreCase(c.cognome);
-            if (compareCognome != 0) {
-                return compareCognome;
-            }
-        }
-
-        if (thisHasNome && otherHasNome) {
-            return nome.compareToIgnoreCase(c.nome);
-        }
-
-        return 0;
-
+        return report;
+        
     }
 
     @Override

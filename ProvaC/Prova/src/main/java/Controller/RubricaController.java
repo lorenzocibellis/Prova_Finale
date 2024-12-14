@@ -37,6 +37,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
@@ -165,9 +166,7 @@ public class RubricaController implements Initializable {
        
         //gestisco L'evento di selezione singola e multipla dei contatti e lo associo alla tabella
         EventHandler<MouseEvent> ClickHandler = event ->{
-            if(event.isControlDown())
-                contattoPane.getChildren().clear();
-            else
+            if(!event.isControlDown())
                 try {  
                     openContact(null); //apre lo studente
 
@@ -177,6 +176,12 @@ public class RubricaController implements Initializable {
         };
         rubricaList.setOnMouseClicked(ClickHandler);
         
+        
+        EventHandler<KeyEvent> escHandler = event -> {
+            if(event.getCode() == javafx.scene.input.KeyCode.ESCAPE)
+                contattoPane.getChildren().clear();
+        };
+        rubricaList.setOnKeyPressed(escHandler);
     }
      
     /**

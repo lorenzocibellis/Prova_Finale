@@ -167,7 +167,7 @@ public class ContattoController implements Initializable {
         if (event.getCode() == javafx.scene.input.KeyCode.ENTER) //gestione evento tasto ENTER
             confirmButton.fire(); // Simula un click sul bottone confirm
         
-        else if(event.getCode() == javafx.scene.input.KeyCode.ESCAPE)  //gestione evento tasto ESCAPE
+        else if(event.getCode() == javafx.scene.input.KeyCode.ESCAPE && exitButton.isVisible())  //gestione evento tasto ESCAPE
             exitButton.fire(); // Simula un click sul bottone exit
         });
     
@@ -248,7 +248,6 @@ public class ContattoController implements Initializable {
         
         //reso il bottone di uscita invisibile e inutilizzabile
         exitButton.setVisible(false);
-        exitButton.setDisable(false);
         
         //invocato metodo disableModify con attributo "true"
         disableModify(true);
@@ -278,6 +277,8 @@ public class ContattoController implements Initializable {
         this.email1Field.setEditable(!disable);
         this.email2Field.setEditable(!disable);
         this.email3Field.setEditable(!disable);
+        this.modifyButton.setVisible(disable);
+        this.confirmButton.setVisible(!disable);
 
     }
 
@@ -291,12 +292,6 @@ public class ContattoController implements Initializable {
      */
     @FXML
     private void modify(javafx.event.ActionEvent event) {
-
-        //si rende invisibile il bottone di modifica
-        modifyButton.setVisible(false);
-        
-        //si rende visibile il bottone di conferma
-        confirmButton.setVisible(true);
         
         //viene invocato il metodo disable modify con attributo "false"
         disableModify(false);
@@ -415,9 +410,9 @@ public class ContattoController implements Initializable {
      * @return Il risultato del controllo
      */
     private boolean nominativeControl(String name, String surname){
-        if (!name.isEmpty() && !Character.isLetter(name.charAt(0)))
+        if (!name.isEmpty() && !Character.isLetter(name.charAt(0))) //controllo primo carattere del nome
             return false;
-        return !( !surname.isEmpty() && !Character.isLetter(surname.charAt(0)) );
+        return !( !surname.isEmpty() && !Character.isLetter(surname.charAt(0)) ); //controllo primo carattere del cognome
     }
     
     
@@ -431,24 +426,25 @@ public class ContattoController implements Initializable {
            
 
         
-        if (!nominativeControl(nameField.getText(), surnameField.getText())) {
+        if (!nominativeControl(nameField.getText(), surnameField.getText())) { //controllo nominativi
             Avviso.errore("Errore","Errore Nominativi","Nominativi inseriti erroneamente");
             flag = false;
         }
 
                 
     
-        if (!(numberControl(number1Field.getText())
+        if (!(numberControl(number1Field.getText()) 
         && numberControl(number2Field.getText())
         && numberControl(number3Field.getText())
         && mailControl(email1Field.getText())
         && mailControl(email2Field.getText())
-        && mailControl(email3Field.getText()))){
+        && mailControl(email3Field.getText()))){ //controllo recapiti
             Avviso.errore("Errore","Errore Recapiti","Recapiti inseriti erroneamente");
             flag = false;
         }
 
-        if (flag) {
+        if (flag) { //controllo flag
+            //creo contatto con le informazioni dei campi
             contactPointer = new Contatto();
             contactPointer.setNome(nameField.getText());
             contactPointer.setCognome(surnameField.getText());
@@ -458,7 +454,8 @@ public class ContattoController implements Initializable {
             contactPointer.setNumero1(number1Field.getText());
             contactPointer.setNumero2(number2Field.getText());
             contactPointer.setNumero3(number3Field.getText());
-                        
+            
+            //controllo aggiunta contatto alla rubrica           
             switch(rubricaPointer.aggiungiContatto(contactPointer)){
                 case 0: goBack(null); break;
                 case 1: Avviso.info("Attenzione", "Contatto Già Esistente", "Il nominativo inserito risulta già presente in rubrica"); break;
@@ -472,7 +469,7 @@ public class ContattoController implements Initializable {
      private void confMod(){
         
          
-      if (contactPointer == null) {
+        if (contactPointer == null) { //controllo che il puntatore al contatto non sia null
             System.out.println("Nessun contatto selezionato.");
             return;
         }    
@@ -481,14 +478,14 @@ public class ContattoController implements Initializable {
       boolean flag = true;
 
 
-            if (!nominativeControl(nameField.getText(), surnameField.getText())) {
-                    Avviso.errore("Errore", "Errore Nominativi","Nominativi modificati erroneamente");
-                    flag = false;
-                }
+        if (!nominativeControl(nameField.getText(), surnameField.getText())) { //controllo nominativi
+                Avviso.errore("Errore", "Errore Nominativi","Nominativi modificati erroneamente");
+                flag = false;
+            }
 
                 
     
-            if (!(numberControl(number1Field.getText())
+            if (!(numberControl(number1Field.getText()) //controllo recapiti
                     && numberControl(number2Field.getText())
                     && numberControl(number3Field.getText())
                     && mailControl(email1Field.getText())
@@ -504,8 +501,8 @@ public class ContattoController implements Initializable {
 
 
             
-                if (flag) {
-                        
+                if (flag) {//controllo flag
+                        //modifico contatto e riordino rubrica
                         contactPointer.setNome(nameField.getText());
                         contactPointer.setCognome(surnameField.getText());
                         contactPointer.setEmail1(email1Field.getText());
@@ -514,14 +511,14 @@ public class ContattoController implements Initializable {
                         contactPointer.setNumero1(number1Field.getText());
                         contactPointer.setNumero2(number2Field.getText());
                         contactPointer.setNumero3(number3Field.getText());
-                  contactPane.setOnKeyPressed(event -> {
-        if (event.getCode() == javafx.scene.input.KeyCode.ENTER) {
-            confirmButton.fire(); // Simula un click sul bottone
-        }
-        });
+                        
+                        
+                        //DA VEDERE
                         Collections.sort(rubricaPointer.getContactList());
                         
-                       contactPane.getChildren().clear();
+
+                       //contactPane.getChildren().clear();
+                        disableModify(true);
                         
                         
                        tablePointer.refresh();    

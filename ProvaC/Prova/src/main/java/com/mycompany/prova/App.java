@@ -28,8 +28,6 @@ import javafx.stage.Stage;
 
 public class App extends Application {
 
-    private static Scene scene;
-
     /**
      * @brief Metodo standard per l'avvio del programma
      * 
@@ -41,7 +39,7 @@ public class App extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("RubricaProva"));
+        Scene scene = new Scene(loadFXML("RubricaProva"));
         stage.setScene(scene);
         stage.show();
         scene.getRoot().requestFocus();
@@ -56,9 +54,6 @@ public class App extends Application {
      * 
      * @throws IOException Eccezione del metodo loadFXML
      */
-    static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
-    }
 
     /**
      * @brief Caricamento nodo principale
