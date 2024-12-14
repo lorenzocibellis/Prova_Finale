@@ -267,7 +267,7 @@ public class ContattoController implements Initializable {
      *                -false: abilita
      *        
      */
-    public void disableModify(boolean disable) {
+    private void disableModify(boolean disable) {
        
         this.nameField.setEditable(!disable);
         this.surnameField.setEditable(!disable);
